@@ -139,7 +139,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Run the statement under the cursor, or the selection (⌘↩); Run all runs each statement in turn, stopping at the first error, with one safe-mode confirmation (⌘⇧↩)
 - [x] Highlight the current statement
 - [~] Autocomplete: tables, columns (schema loaded at connect) and keywords. Still missing: functions, uppercase-keywords and Enter/Tab settings
-- [ ] Beautify / format SQL, with Standard, Tabular Left and Tabular Right styles
+- [x] Format SQL (⌘I or Format in the run bar): the selection or everything, with Standard, Tabular left and Tabular right styles (Settings › Editor), using sql-formatter
 - [x] Toggle line comment (⌘/) and block comment (⌥⇧A), from CodeMirror
 - [x] Find and replace (⌘F in the editor), with regex, match case and whole word, from CodeMirror
 - [ ] Text transforms: upper, lower and capitalize case, shift left and right, trim trailing whitespace, convert indentation
