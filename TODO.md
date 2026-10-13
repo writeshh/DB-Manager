@@ -76,7 +76,8 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Save (⌘S) and Discard, ⌘⌫ sets NULL
 - [ ] Virtualized grid so large pages scroll smoothly
 - [ ] Page settings: page size, jump to an offset, estimated count for tables above a threshold with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
-- [ ] Sort by clicking a column header; sort on several columns; default sort setting
+- [x] Sort by clicking a column header (ascending, descending, off); Shift-click sorts on several columns
+- [ ] Default sort setting (none / primary key ascending / descending)
 - [ ] Show and hide columns, reorder and resize them, and remember widths and positions for each table
 - [ ] Add row, duplicate rows, delete rows (staged like edits)
 - [ ] Preview the pending changes as SQL before committing (Ref: toolbar "Preview your changes as SQL Statements")
@@ -93,12 +94,12 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 ## 6. Filters
 
-- [ ] Filter bar (⌘F): column + operator + value, multiple rows, each with an on/off checkbox, combined with AND (default) or OR (Ref: `FilterViewController`)
-- [ ] Operators: =, ≠, <, >, contains, not contains, IN, IS NULL, IS NOT NULL, BETWEEN, and raw SQL
-- [ ] Filter on "any column"
-- [ ] Clone and remove filter rows; apply one rule or all of them
+- [x] Filter bar (⌘F, or Filters in the footer): column + operator + value, multiple rows, each with an on/off checkbox, combined with AND (default) or OR; values are bound by the backend (`browse`) (Ref: `FilterViewController`)
+- [x] Operators: =, ≠, <, ≤, >, ≥, contains, not contains, starts with, ends with, IN, NOT IN, BETWEEN, NOT BETWEEN, IS NULL, IS NOT NULL, is empty, is not empty, and raw SQL
+- [x] Filter on "any column"
+- [~] Add and remove filter rows, apply all (done). Still missing: clone a row, apply a single row
 - [ ] Show the SQL a filter produces
-- [ ] Quick filter from a cell: right-click → filter rows with this value
+- [x] Quick filter from a cell: right-click → filter rows with this value (IS NULL for NULL cells)
 - [ ] Filter defaults: default column, operator and state (Ref: TableDataController "Advanced Filter settings")
 - [ ] Export the filtered result (Ref: `ExportFilterResultWindow`)
 
