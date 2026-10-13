@@ -147,7 +147,8 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [ ] Vim key binding (setting: Sublime or Vim)
 - [x] Query parameters: `:name` (default), `$name`, `${name}`, `{{name}}`, `%name%` or `?` (Settings › Editor, or off), found outside strings and comments, asked for once per run with the last values remembered (Ref: `VariableWindow`, `VariableOptionWindow`)
 - [x] Row limit for each run (100 to 100,000 or none; default 1,000): the backend streams rows and keeps only that many, so a huge result can't fill memory
-- [ ] Open and save `.sql` files; New SQL Viewer window (Ref: `SQLViewerWindow`)
+- [x] Open (⌘O) and save (⌘S, Save as ⌘⇧S) `.sql` files in SQL tabs; files up to 20 MB, saved through a temporary file (dialogs not yet tried in the app window)
+- [ ] New SQL Viewer window (Ref: `SQLViewerWindow`)
 - [x] SQL tabs are saved per connection and reopened on connect (Settings › Editor, on by default)
 - [x] Explain: the plan for the statement under the cursor (EXPLAIN, or EXPLAIN QUERY PLAN on SQLite); safe mode treats EXPLAIN of a query as read-only
 
