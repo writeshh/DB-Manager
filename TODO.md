@@ -177,15 +177,15 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 13. Import and export
 
-- [ ] Export a table to CSV, JSON, SQL or Excel; choose fields, delimiter, quoting, line break and decimal; field names in the first row; NULL → empty; gzip; SQL with or without structure, content and DROP IF EXISTS (Ref: `ExportTableWindow`)
-- [ ] Export several tables at once (Ref: `ExportTablesWindow`)
-- [ ] Export the current page, or the filtered result
-- [ ] File-name patterns such as connection name, table name and date (Ref: `NamingPattern`)
-- [ ] Run exports and imports in the background, with progress and cancel
-- [ ] Import CSV wizard: preview the first 100 rows, header row, encoding, delimiter and quote, match columns by name and/or order (case-insensitive optional), create a new table, insert / update on duplicate / stop on error (Ref: `ImportCSVWizardWindow`)
-- [ ] Import JSON wizard (Ref: `ImportJSONWizardWindow`)
-- [ ] Import SQL wizard: preview, run a `.sql` file with progress (Ref: `ImportSQLWizardWindow`)
-- [ ] CSV defaults in settings: delimiter, quote, line break, decimal
+- [x] Export a table to CSV, JSON or SQL; delimiter, quote-if-needed or quote all, line break, field names in the first row, NULL → empty; gzip; SQL with or without structure, content and DROP IF EXISTS (Ref: `ExportTableWindow`). Rows stream from the database into a temporary file that is renamed into place. Not done: Excel, choosing fields, a decimal separator; JSON values are all strings (cells are text); SQLite blobs export as `<n bytes>`; Postgres structure is rebuilt from the columns (types, NOT NULL, defaults, primary key), without other constraints or indexes
+- [x] Export several tables at once, one file each (Ref: `ExportTablesWindow`)
+- [x] Export the current page, or the filtered result; an editor query's result is run again for export
+- [x] File-name patterns: {connection}, {database}, {table}, {date}, {time} (Ref: `NamingPattern`)
+- [x] Run exports and imports in the background on their own connection, with progress and cancel
+- [x] Import CSV wizard: preview the first 100 rows, header row, delimiter and quote, empty as NULL, match columns by name (case-insensitive optional) or order, create a new table of text columns, stop / skip / update on duplicates; batched INSERTs with bound values in one transaction (Ref: `ImportCSVWizardWindow`). Not done: encodings other than UTF-8
+- [x] Import JSON wizard: an array of objects, up to 100 MB (Ref: `ImportJSONWizardWindow`)
+- [x] Import SQL wizard: preview, run a `.sql` file statement by statement with progress, stopping at the first error (Ref: `ImportSQLWizardWindow`). Not done: MySQL's `DELIMITER` command
+- [ ] CSV defaults in settings: delimiter, quote, line break, decimal. For now the export dialog remembers its last choices
 
 ## 14. Backup and restore
 
