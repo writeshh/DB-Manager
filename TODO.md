@@ -34,10 +34,10 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - Not needed: TablePlus's MySQL "dialect" picks between its bundled 5.7 and 9.7 client libraries; the pure-Rust driver talks to old and new servers alike
 - [ ] SQLite: open encrypted databases with a passphrase (SQLCipher)
 - [x] Bootstrap commands: SQL run after connecting (and on every reopen), and a shell script run before connecting and before any SSH tunnel (Ref: `StartupQueryPopover`)
-- [ ] Keep connection alive: ping every 30 s (setting)
-- [ ] Query timeout (setting, default 300 s)
+- [x] Keep connection alive: ping every 30 s (Settings › General); a connection that stops answering shows the reconnect banner
+- [x] Query timeout (Settings › General, default 300 s): the query is stopped on the server (Postgres cancel, MySQL `KILL QUERY`, SQLite interrupt), and the connection stays usable
 - [x] Reconnect (⌘⇧R), with a banner when the connection drops; tabs stay open and the database in use is re-selected. Returning to a workspace whose connection died reopens it quietly
-- [ ] Connection info popover: driver, server version, TLS cipher, reconnect, disconnect (Ref: `ConnectionInfoPopover`)
+- [x] Connection info popover (click the status pill): server version, driver, TLS cipher, SSH host, reconnect, disconnect (Ref: `ConnectionInfoPopover`)
 
 ## 3. Workspace window
 
