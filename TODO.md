@@ -111,27 +111,29 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 ## 8. Table structure
 
-- [~] Structure view showing columns (read-only today)
-- [ ] Edit columns: add, drop, rename, change type, length, nullable, default, comment, auto-increment, and reorder (MySQL); staged like data edits, previewed as SQL, committed with ⌘S (Ref: `TableStructureController`)
-- [ ] Indexes: list, add and drop indexes, with name, columns, unique flag and method (Ref: `TableIndexController`)
-- [ ] Foreign keys: column, referenced table and columns, ON UPDATE and ON DELETE (Ref: `ForeignKeyPopover`)
-- [ ] Triggers: list, add, edit and drop (Ref: `TriggerPopover`)
-- [ ] Check constraints and the primary key
-- [ ] Table options: name, comment, engine and collation (MySQL)
-- [ ] View the DDL of a table or view (Ref: `ViewDDLController`)
+- [x] Structure view: columns, indexes, foreign keys, checks and triggers in sections (`structure.ts`, `structure.rs`)
+- [~] Edit columns: add, drop, rename, change type, nullable, default, comment and auto-increment; staged, previewed as SQL, committed with ⌘S (done). Still missing: reorder (MySQL), length as its own field, and on SQLite changing a type, nullability or default (needs a table rebuild: create, copy, drop, rename) (Ref: `TableStructureController`)
+- [~] Indexes: list, add and drop with name, columns and unique flag (done). Still missing: choosing the method when adding (Ref: `TableIndexController`)
+- [x] Foreign keys: column, referenced table and columns, ON UPDATE and ON DELETE; on SQLite only when creating the table (Ref: `ForeignKeyPopover`)
+- [~] Triggers: listed (done). Still missing: add, edit and drop (Ref: `TriggerPopover`)
+- [~] Check constraints and the primary key: checks listed, primary key set when creating a table (done). Still missing: adding and dropping checks, changing an existing table's primary key
+- [~] Table options: name and comment (done). Still missing: engine and collation (MySQL)
+- [x] View the DDL of a table or view: MySQL `SHOW CREATE TABLE`, SQLite `sqlite_master`, Postgres written from the structure (Ref: `ViewDDLController`)
 - [ ] View structure and definition editing (Ref: `ViewStructureController`)
 - [ ] Function and procedure editor (Ref: `FunctionViewController`)
 - [ ] Sequence editor: current value, increment, cache size, comment (Ref: `SequenceController`)
 
 ## 9. Table operations
 
-- [ ] Create table (a new structure tab)
-- [ ] Clone table, with or without its data (Ref: `CloneTableWindow`)
-- [ ] Truncate: cascade, restart identity (Ref: `TruncateTableWindow`)
-- [ ] Drop: cascade, ignore foreign key checks (Ref: `DeleteTableWindow`)
-- [ ] Rename table
-- [ ] Reset auto-increment
-- [ ] Create, rename and drop schemas
+Right-click a table in the sidebar (or the sidebar's empty space). Each shows its SQL and runs only when confirmed.
+
+- [x] Create table (a new structure tab)
+- [x] Clone table, with or without its data. SQLite copies the definition and rows, not indexes or triggers; a Postgres copy shares serial sequences with the original (Ref: `CloneTableWindow`)
+- [x] Truncate: cascade, restart identity (Postgres); ignore foreign key checks (MySQL); reset auto-increment (SQLite) (Ref: `TruncateTableWindow`)
+- [x] Drop: cascade (Postgres), ignore foreign key checks (MySQL) (Ref: `DeleteTableWindow`)
+- [x] Rename table
+- [x] Reset auto-increment (to one past the largest value)
+- [x] Create, rename and drop schemas (Postgres)
 
 ## 10. SQL editor
 
