@@ -19,7 +19,7 @@ Sources: [Apollo Rust best practices](https://github.com/apollographql/rust-best
 - Never lose user data on an error: refuse to write over a file that failed to load, and write files to a temporary path and then rename.
 
 **Input and SQL**
-- Values go into SQL as bound parameters (`$n` / `?`; `PgText` on Postgres). Only identifiers are quoted by hand, through `Conn::ident`.
+- Values go into SQL as bound parameters (`$n` / `?`; `PgText` on Postgres). Only two things are escaped by hand: identifiers, through `Conn::ident` (`Dialect::ident`), and string literals in DDL, which takes no parameters (comments), through `Dialect::literal`.
 - Fixed value sets are enums (`Engine`), not strings or booleans. Types the UI sends are `#[serde(deny_unknown_fields)]`.
 - Cap anything untrusted that drives an allocation or a loop (row counts, file sizes, import lengths).
 
