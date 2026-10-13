@@ -227,13 +227,18 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 20. MCP server
 
-- [ ] Built-in MCP server with stdio bridge binary (like `tableplus-mcp`)
-- [ ] Access tokens: create, name, choose which connections each token can reach, read-only or read-write, revoke; the value is shown once (Ref: `MCPTokenSetupWindow`)
-- [ ] Auto-generated token for the local bridge
-- [ ] Approval needed for unsafe queries (on by default)
-- [ ] Optional HTTP server with TLS for remote access, preferred port, export the certificate
-- [ ] One-click setup for Claude Code, Cursor and other agents, plus manual setup instructions
-- [ ] Activity log of tool calls; connected clients list; disconnect clients (Ref: `MCPIntegrationsActivityWindow`)
+- [x] Built-in MCP server with stdio bridge binary (like `tableplus-mcp`): streamable HTTP on 127.0.0.1 (rmcp, stateless), `dbmanager-mcp` bridge; tools list_connections, list_tables, describe_table, run_query (row limit and query timeout apply)
+- [ ] Ship the bridge inside the app bundle (Tauri `externalBin` needs a target-triple copy of `dbmanager-mcp` before `tauri build`); until then build it with `cargo build --bin dbmanager-mcp`
+- [x] Access tokens: create, name, choose which connections each token can reach, read-only or read-write, revoke; the value is shown once (Ref: `MCPTokenSetupWindow`)
+- [x] Auto-generated token for the local bridge (`mcp-bridge.json`, mode 0600; revoking it rotates it)
+- [x] Approval needed for unsafe queries (on by default; a connection in safe mode always asks; read-only tokens never write)
+- [x] Preferred port (another free port when it's taken)
+- [ ] Optional HTTP server with TLS for remote access, export the certificate (out of scope for now: the server is loopback-only)
+- [x] Manual setup instructions for Claude Code, Cursor and other agents, and for HTTP with a token
+- [ ] One-click setup that edits an agent's config file (back it up first; never rewrite a config that doesn't parse)
+- [x] Activity log of tool calls, viewable and clearable (Ref: `MCPIntegrationsActivityWindow`)
+- [ ] Connected clients list; disconnect clients (the server is stateless, so there are no sessions to list yet)
+- [ ] Read-only tokens: also run their queries in a read-only transaction, so a SELECT calling a side-effect function can't write
 
 ## 21. Plugins and custom scripts
 
@@ -252,7 +257,7 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [ ] Shortcuts: rebind every menu command, with conflict detection (Ref: `SettingShortcutKeyController`)
 - [ ] Fonts and themes: see section 23
 - [ ] AI: see section 19
-- [ ] MCP: see section 20
+- [x] MCP: see section 20
 
 ## 23. Themes and appearance
 
