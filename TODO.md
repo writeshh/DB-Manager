@@ -78,7 +78,8 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [ ] Page settings: page size, jump to an offset, estimated count for tables above a threshold with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
 - [x] Sort by clicking a column header (ascending, descending, off); Shift-click sorts on several columns
 - [ ] Default sort setting (none / primary key ascending / descending)
-- [ ] Show and hide columns, reorder and resize them, and remember widths and positions for each table
+- [x] Show and hide columns (Columns in the footer) and resize them (drag a header edge, double-click to fit), remembered per connection and table
+- [ ] Reorder columns by dragging headers
 - [ ] Add row, duplicate rows, delete rows (staged like edits)
 - [ ] Preview the pending changes as SQL before committing (Ref: toolbar "Preview your changes as SQL Statements")
 - [ ] Undo and redo staged edits
