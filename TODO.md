@@ -189,13 +189,13 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 14. Backup and restore
 
-- [ ] Backup: pick connection and database, tool version, extra options (`--data-only`, `--schema-only`, …), gzip, file name (Ref: `BackupWindow`)
-- [ ] Restore into an existing or new database (Ref: `RestoreWindow`)
-- [ ] Use `pg_dump`/`pg_restore` and `mysqldump`/`mysql`, matched to the server version; pass passwords through environment variables, never in command arguments
+- [x] Backup: pick connection and database, tool version, extra options (`--data-only`, `--schema-only`, …), gzip, file name (Ref: `BackupWindow`). Launcher right-click or the workspace's Tools menu; runs in the background with progress and cancel (bottom-right panel). SQLite uses the online backup API (SQLCipher files stay encrypted). Postgres also offers the custom archive format
+- [x] Restore into an existing or new database (Ref: `RestoreWindow`). Always confirmed; safe mode is enforced in Rust too. Gzip and pg_dump archives are detected from the file (archives go to pg_restore, scripts to psql with ON_ERROR_STOP). SQLite copies the backup back over the file with the backup API
+- [x] Use `pg_dump`/`pg_restore` and `mysqldump`/`mysql`, matched to the server version; pass passwords through environment variables, never in command arguments. Found on PATH, Homebrew, Postgres.app and DBngin; the oldest same-flavour version not older than the server wins, or Choose… a folder. SSH tunnels and TLS mode/files are mirrored (libpq conninfo with `hostaddr`; MySQL `--ssl-mode`, MariaDB `--ssl` flags). Not yet: a connect timeout for mysqldump (it has no flag; Cancel covers it), MySQL VERIFY_IDENTITY through a tunnel checks 127.0.0.1
 
 ## 15. Admin tools
 
-- [ ] Process list: running queries, refresh, kill (Ref: `ProcessListWindow`)
+- [x] Process list: running queries, refresh, kill (Ref: `ProcessListWindow`). Own side connection (works while the workspace runs a query), auto-refresh every 3 s, Cancel query / Kill behind a confirmation. MySQL reads `information_schema.processlist` (SHOW FULL PROCESSLIST minus its own session)
 - [ ] User management, Postgres: roles, login, superuser, create DB, replication, bypass RLS, global and table privileges (Ref: `PGUserManagerWindow`)
 - [ ] User management, MySQL: users and hosts, global, database and table privileges, resource limits (Ref: `MSUserManagerWindow`)
 
