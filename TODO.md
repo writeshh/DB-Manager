@@ -145,7 +145,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [ ] Text transforms: upper, lower and capitalize case, shift left and right, trim trailing whitespace, convert indentation
 - [ ] Show invisible characters, wrap lines, font size
 - [ ] Vim key binding (setting: Sublime or Vim)
-- [ ] Query parameters: `:name`, `$name`, `${name}`, `{{name}}`, `%name%`, `?`, with a prompt for values before running (Ref: `VariableWindow`, `VariableOptionWindow`)
+- [x] Query parameters: `:name` (default), `$name`, `${name}`, `{{name}}`, `%name%` or `?` (Settings › Editor, or off), found outside strings and comments, asked for once per run with the last values remembered (Ref: `VariableWindow`, `VariableOptionWindow`)
 - [x] Row limit for each run (100 to 100,000 or none; default 1,000): the backend streams rows and keeps only that many, so a huge result can't fill memory
 - [ ] Open and save `.sql` files; New SQL Viewer window (Ref: `SQLViewerWindow`)
 - [ ] Auto-save SQL tabs (setting: save none, the first, or all)
