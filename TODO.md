@@ -28,10 +28,12 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 - [x] **SSH tunnel**: server, port, user, password or private key (with key password), "use ~/.ssh/config when the key is empty" (Ref: `ConnectionPartSSHController`). Backend tested end to end with `scripts/test-ssh.sh`; the form is not yet tried in the app window. Not yet: ProxyJump/ProxyCommand, host certificates, a file picker for the key
 - [x] SSL: Disable / Prefer / Require / Verify CA / Verify full for every engine, with libpq semantics (Prefer and Require encrypt without checking the certificate), CA, client cert and key files with file pickers; TLS is checked against the real host name through SSH tunnels (Ref: `PostgreSQLForm`, `MySQLForm`)
-- [ ] Postgres options: negotiation (POSTGRES / DIRECT), load system schemas, disable channel binding
-- [ ] MySQL options: socket instead of host, SNI routing, dialect (Default / Old MySQL / SingleStore), CLEARTEXT plugin, LOAD DATA LOCAL INFILE
+- [x] Postgres options: direct TLS negotiation, show system schemas, disable channel binding (More options in the form)
+- [x] MySQL options: socket instead of host (not yet tried against a real socket), SNI name, cleartext auth plugin
+- [ ] MySQL `LOAD DATA LOCAL INFILE`: the server picks which local file the client sends, so a blanket switch lets any server read your files. Only allow files named in the statement being run
+- Not needed: TablePlus's MySQL "dialect" picks between its bundled 5.7 and 9.7 client libraries; the pure-Rust driver talks to old and new servers alike
 - [ ] SQLite: open encrypted databases with a passphrase (SQLCipher)
-- [ ] Bootstrap commands: SQL run after connecting, and a bash script run before connecting (Ref: `StartupQueryPopover`)
+- [x] Bootstrap commands: SQL run after connecting (and on every reopen), and a shell script run before connecting and before any SSH tunnel (Ref: `StartupQueryPopover`)
 - [ ] Keep connection alive: ping every 30 s (setting)
 - [ ] Query timeout (setting, default 300 s)
 - [ ] Reconnect (⌘⇧R), with a clear banner when the connection drops
