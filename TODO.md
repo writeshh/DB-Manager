@@ -136,18 +136,17 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 ## 10. SQL editor
 
 - [x] CodeMirror with syntax highlighting and line numbers
-- [x] Run the selection, or everything when nothing is selected
-- [ ] Run Current Query (⌘↩: the statement under the cursor) versus Run All (⌘⇧↩)
-- [ ] Highlight the current statement
-- [ ] Autocomplete: tables, columns, keywords and functions, with optional automatic schema prefixes, automatic uppercase keywords, and accept with Enter or Tab (setting)
+- [x] Run the statement under the cursor, or the selection (⌘↩); Run all runs each statement in turn, stopping at the first error, with one safe-mode confirmation (⌘⇧↩)
+- [x] Highlight the current statement
+- [~] Autocomplete: tables, columns (schema loaded at connect) and keywords. Still missing: functions, uppercase-keywords and Enter/Tab settings
 - [ ] Beautify / format SQL, with Standard, Tabular Left and Tabular Right styles
-- [ ] Toggle line comment (⌘/) and block comment
-- [ ] Find and replace, including regex, match case and whole word
+- [x] Toggle line comment (⌘/) and block comment (⌥⇧A), from CodeMirror
+- [x] Find and replace (⌘F in the editor), with regex, match case and whole word, from CodeMirror
 - [ ] Text transforms: upper, lower and capitalize case, shift left and right, trim trailing whitespace, convert indentation
 - [ ] Show invisible characters, wrap lines, font size
 - [ ] Vim key binding (setting: Sublime or Vim)
 - [ ] Query parameters: `:name`, `$name`, `${name}`, `{{name}}`, `%name%`, `?`, with a prompt for values before running (Ref: `VariableWindow`, `VariableOptionWindow`)
-- [ ] Row limit for each run: none, 100, 500, 1k, 5k, 10k, 50k, 100k, 500k
+- [x] Row limit for each run (100 to 100,000 or none; default 1,000): the backend streams rows and keeps only that many, so a huge result can't fill memory
 - [ ] Open and save `.sql` files; New SQL Viewer window (Ref: `SQLViewerWindow`)
 - [ ] Auto-save SQL tabs (setting: save none, the first, or all)
 - [ ] Explain / query plan
