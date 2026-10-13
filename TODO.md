@@ -36,7 +36,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Bootstrap commands: SQL run after connecting (and on every reopen), and a shell script run before connecting and before any SSH tunnel (Ref: `StartupQueryPopover`)
 - [ ] Keep connection alive: ping every 30 s (setting)
 - [ ] Query timeout (setting, default 300 s)
-- [ ] Reconnect (⌘⇧R), with a clear banner when the connection drops
+- [x] Reconnect (⌘⇧R), with a banner when the connection drops; tabs stay open and the database in use is re-selected. Returning to a workspace whose connection died reopens it quietly
 - [ ] Connection info popover: driver, server version, TLS cipher, reconnect, disconnect (Ref: `ConnectionInfoPopover`)
 
 ## 3. Workspace window
