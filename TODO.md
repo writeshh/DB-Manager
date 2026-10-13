@@ -82,7 +82,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [ ] Add row, duplicate rows, delete rows (staged like edits)
 - [ ] Preview the pending changes as SQL before committing (Ref: toolbar "Preview your changes as SQL Statements")
 - [ ] Undo and redo staged edits
-- [ ] Copy rows; Copy Rows As plain text, Markdown table, CSV with header, or INSERT statement; copy selected cells; copy all of a column's values (Ref: `TableDataController`)
+- [x] Select cells (click, Shift-click, drag, row numbers, ⌘A) and copy (⌘C); Copy rows as CSV with header, Markdown table or INSERT statements; copy a column name or all its values on the page (Ref: `TableDataController`)
 - [ ] Paste into the selected cells
 - [ ] Cell editors: date picker, dropdown for enum and boolean columns, JSON editor (tree and text, pretty and minify), binary and bytea viewer, load a cell's value from a file (Ref: `DatePickerPopover`, `JSONEditorController`)
 - [ ] Quick Look editor: open a large value in a window (Ref: `QuickLookWindow`)
