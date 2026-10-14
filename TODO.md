@@ -202,7 +202,9 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 16. Diagram
 
-- [ ] ER diagram of a schema: tables with columns and FK lines, add tables, rearrange and auto-layout, zoom, search, save and open diagram files (Ref: `DiagramWindow`)
+- [x] ER diagram of a schema: tables and views with columns (key, foreign-key and type), FK lines from column to column, choose tables (a schema over 80 tables starts with a picker, or from the right-clicked table and its neighbours; at most 500 drawn), add related tables, drag, auto layout, zoom and pan, fit, search (adds a table that isn't shown), double-click to open a table (Ref: `DiagramWindow`). Sidebar right-click (schema or table) → Show diagram, and Tools › Show Diagram. One query per engine (`diagram.rs`); the layout is our own layered one, no dependency. The diagram stays per session and schema until the app quits
+- [x] Save and open diagram files (JSON, `version: 1`, table names and positions; temp file then rename; a malformed file is refused and leaves the diagram as it was; tables no longer in the database are left out with a note). Export PNG (2x) or SVG with the theme's colours
+- [ ] Diagram: notes and colours on tables, lines routed around boxes, printing; FKs into another schema aren't drawn
 
 ## 17. Metrics board
 
