@@ -47,6 +47,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Rename tab (double-click or right-click it), close other tabs, reopen closed tab (⌘⇧T), select tab 1–9 (⌘1…⌘9, 9 is the last), next and previous tab (⌘⇧] / ⌘⇧[, ⌃Tab / ⌃⇧Tab)
 - [~] Split pane right (⌘⇧D), and next and previous pane (⌘⌥] / ⌘⌥[); each pane has its own tabs, Back/Forward and closed tabs (done). Still missing: only the focused pane is live; the others show a still copy of their last frame until clicked (the grid and editor draw into one place)
 - [x] Multiple workspaces (connections) in one window: click the connection name for the switcher (Show All Workspaces), next and previous workspace (⌃⌘] / ⌃⌘[), Reconnect All Workspaces; a lost connection in the background shows on the switcher
+- [ ] Database tabs: every open database gets a tab in a strip above the item tabs, so switching is one click instead of the switcher. This covers other connections and other databases on the same server (each with its own session, sidebar and item tabs). Each tab shows the connection's color and the database name, has a lost-connection mark and closes with its ×; drag to reorder
 - [~] New workspace (⌘N: the launcher, with the open workspaces kept) done. Still missing: new window
 - [x] Open Anything (⌘P): fuzzy search across tables, views, materialized views, functions, sequences, types, SQL tabs, other workspaces and commands, with arrow keys and Enter (Ref: `OpenAnythingController`). Saved queries join when section 12 has them
 - [ ] Toolbar: connection, database, SQL file, reload, safe-mode level, console log, row detail, metrics, user management (Ref: `WorkspaceWindow`)
@@ -229,8 +230,8 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 20. MCP server
 
-- [x] Built-in MCP server with stdio bridge binary (like `tableplus-mcp`): streamable HTTP on 127.0.0.1 (rmcp, stateless), `dbmanager-mcp` bridge; tools list_connections, list_tables, describe_table, run_query (row limit and query timeout apply)
-- [ ] Ship the bridge inside the app bundle (Tauri `externalBin` needs a target-triple copy of `dbmanager-mcp` before `tauri build`); until then build it with `cargo build --bin dbmanager-mcp`
+- [x] Built-in MCP server with stdio bridge binary (like `tableplus-mcp`): streamable HTTP on 127.0.0.1 (rmcp, stateless), `tableminus-mcp` bridge; tools list_connections, list_tables, describe_table, run_query (row limit and query timeout apply)
+- [ ] Ship the bridge inside the app bundle (Tauri `externalBin` needs a target-triple copy of `tableminus-mcp` before `tauri build`); until then build it with `cargo build --bin tableminus-mcp`
 - [x] Access tokens: create, name, choose which connections each token can reach, read-only or read-write, revoke; the value is shown once (Ref: `MCPTokenSetupWindow`)
 - [x] Auto-generated token for the local bridge (`mcp-bridge.json`, mode 0600; revoking it rotates it)
 - [x] Approval needed for unsafe queries (on by default; a connection in safe mode always asks; read-only tokens never write)

@@ -1,4 +1,4 @@
-# DB Manager
+# Table Minus
 
 Tauri 2 app: Rust core in `src-tauri/`, plain TypeScript UI in `src/`. The feature roadmap (TablePlus parity) is [TODO.md](TODO.md).
 
