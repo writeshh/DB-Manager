@@ -11,18 +11,18 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Test, Save, Connect buttons
 - [x] Passwords kept in the OS keychain, never in the connections file
 - [x] Tag on each connection (local / development / staging / production)
-- [ ] Password storage choice: Store in keychain / Ask every time / No password (Ref: `PostgreSQLForm`)
-- [ ] Status color for each connection, five swatches (Ref: `ConnectionPartNameController`)
-- [ ] Groups: create, rename and delete groups, with an icon each; drag connections into them (Ref: `CreateGroupWindow`)
-- [ ] Tag manager with custom tags and colors (Ref: `TagManagerWindow`)
-- [ ] Sort connections by name, driver or tag
-- [ ] Duplicate a connection, Copy as URL
-- [ ] Import a connection from a URL, e.g. `postgresql://user@localhost/db` (Ref: `ImportConnectionURLWindow`)
-- [ ] Import and export connections as a file: all, one group or one connection, password-protected, with an option to include passwords (Ref: `ExportConnectionWindow`)
-- [ ] Open Recent list, and open a connection in a new tab or a new window (Ref: `ConnectionWindow`)
-- [ ] Reopen closed workspaces at startup
-- [ ] Open by URL scheme, e.g. `postgresql://`, `mysql://`, `redis://` links open the app
-- [ ] Open `.sqlite` files and TablePlus connection files from Finder
+- [x] Password storage choice: Store in keychain / Ask every time / No password (Ref: `PostgreSQLForm`). "Ask every time" asks at connect and keeps the password in memory until the workspace closes. Not yet for the SQLite passphrase; a Safe-level connection that asks every time has no saved password to check against
+- [x] Status color for each connection, five swatches, on the launcher row and the workspace header (Ref: `ConnectionPartNameController`)
+- [x] Groups: create, rename and delete groups, with an icon each; drag connections onto a group heading, or right-click › Move to (Ref: `CreateGroupWindow`). Stored in `connections.json`, which is now `{ connections, groups, tags }` (builds from before this can't read it; the old array still loads). Not yet: nested groups, manual ordering
+- [x] Tag manager with custom tags and colors, launcher ⋯ › Manage Tags (Ref: `TagManagerWindow`)
+- [x] Sort connections by name, driver or tag
+- [x] Duplicate a connection (with its keychain secrets), Copy as URL (never the password)
+- [x] Import a connection from a URL, e.g. `postgresql://user@localhost/db`, or a SQLite path; opens the form filled in (Ref: `ImportConnectionURLWindow`)
+- [x] Import and export connections as a file: all, one group or one connection, password-protected (AES-256-GCM, argon2id key), with an option to include passwords, which only go into a protected file (Ref: `ExportConnectionWindow`). Name clashes on import get a free name
+- [~] Open Recent list: File › Open Recent and a Recent section on the launcher (done). Still missing: open a connection in a new window (Ref: `ConnectionWindow`)
+- [x] Reopen the workspaces open at quit, at startup (Settings › General, off by default)
+- [~] Open by URL scheme: `postgresql://`, `postgres://`, `mysql://`, `mariadb://` links (`Info.plist`) open the new-connection form filled in. Not tried in a bundled app yet; macOS only (other platforms need the deep-link plugin)
+- [~] Open `.sqlite`/`.db` files from Finder (file associations, rank Alternate): the form opens filled in. Not tried in a bundled app yet. Still missing: TablePlus connection files
 
 ## 2. Connection transport
 
