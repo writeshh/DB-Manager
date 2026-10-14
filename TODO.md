@@ -47,14 +47,14 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Rename tab (double-click or right-click it), close other tabs, reopen closed tab (⌘⇧T), select tab 1–9 (⌘1…⌘9, 9 is the last), next and previous tab (⌘⇧] / ⌘⇧[, ⌃Tab / ⌃⇧Tab)
 - [~] Split pane right (⌘⇧D), and next and previous pane (⌘⌥] / ⌘⌥[); each pane has its own tabs, Back/Forward and closed tabs (done). Still missing: only the focused pane is live; the others show a still copy of their last frame until clicked (the grid and editor draw into one place)
 - [x] Multiple workspaces (connections) in one window: click the connection name for the switcher (Show All Workspaces), next and previous workspace (⌃⌘] / ⌃⌘[), Reconnect All Workspaces; a lost connection in the background shows on the switcher
-- [ ] Database tabs: every open database gets a tab in a strip above the item tabs, so switching is one click instead of the switcher. This covers other connections and other databases on the same server (each with its own session, sidebar and item tabs). Each tab shows the connection's color and the database name, has a lost-connection mark and closes with its ×; drag to reorder
+- [x] Database tabs: every open database gets a tab in a strip above the header (shown once two are open), so switching is one click instead of the switcher. This covers other connections and other databases on the same server (each with its own session, sidebar and item tabs: ⌘K › New Tab, or ⌘↩ in the list). Each tab shows the connection's tag color and the database name, has a lost-connection mark and closes with its × (or middle-click); drag to reorder. Only a connection's first tab keeps its SQL tabs across launches
 - [~] New workspace (⌘N: the launcher, with the open workspaces kept) done. Still missing: new window
 - [x] Open Anything (⌘P): fuzzy search across tables, views, materialized views, functions, sequences, types, SQL tabs, other workspaces and commands, with arrow keys and Enter (Ref: `OpenAnythingController`). Saved queries join when section 12 has them
 - [ ] Toolbar: connection, database, SQL file, reload, safe-mode level, console log, row detail, metrics, user management (Ref: `WorkspaceWindow`)
 - [ ] Toggle the left sidebar, right sidebar, bottom console and results pane
 - [x] Reload current tab (⌘R), reload workspace (⌘⌥R)
 - [x] Go back and forward through opened items (⌃⌘← / ⌃⌘→)
-- [ ] Database window: create, rename and drop databases; open in a new or the current tab (Ref: `DatabaseWindow`, `NewDatabaseWindow` with encoding and collation)
+- [x] Database window (⌘K): create (encoding/character set and collation), rename and drop databases on Postgres and MySQL/MariaDB, each through the SQL preview and safe mode; open in the current tab or a new one (Ref: `DatabaseWindow`, `NewDatabaseWindow`). MySQL has no RENAME DATABASE: its tables move to a new database and the old one is dropped, refused when it has views, routines, triggers or events. Postgres can't rename or drop the database a session is on (the server says so)
 - [ ] Notifications panel for finished background jobs (exports, imports, backups)
 
 ## 4. Left sidebar
