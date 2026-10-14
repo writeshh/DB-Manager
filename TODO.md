@@ -158,23 +158,23 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 ## 11. Query results
 
 - [x] Results table under the editor
-- [ ] Several statements: split results into tabs, or append them all in one tab (Ref: `QueryResultAppendingModeController`)
-- [ ] Message tab: affected rows and errors; execution time including network latency
-- [ ] Stop on error option
-- [ ] Pin a result tab so it stays
-- [ ] Search and replace within a result (Ref: `QueryResultController`)
-- [ ] Load more rows
-- [ ] Edit results from a single-table query in place, the same as the data grid
+- [x] Several statements: split results into tabs, or append them all in one tab (Ref: `QueryResultAppendingModeController`). Settings › Editor › Several results. One call returns every result set too (MySQL procedures, SQLite batches, a selection run as one), at most 100 per call, the row limit shared across them
+- [x] Message tab: affected rows and errors per statement, and its time. Timed in the UI around each statement, so it includes network latency and the app's own round trip
+- [x] Stop on error option (Settings › Editor › Run all)
+- [x] Pin a result tab so it stays
+- [~] Search and replace within a result (Ref: `QueryResultController`). Search filters the shown result's rows; no replace
+- [x] Load more rows: a read-only statement whose result was cut runs again with room for another row limit's worth
+- [x] Edit results from a single-table query in place, the same as the data grid. Only a plain `SELECT … FROM one_table [WHERE/ORDER/LIMIT]` whose columns are all the table's own, key included; not in the one-tab mode or while searching. Saving runs the statement again
 - [ ] Charts from results: line, bar and pie, with x and y axis pickers; add a chart to the Metrics Board
-- [ ] Export one result, or all result tabs (Ref: `ExportResultWindow`, `ExportMultipleResultsWindow`)
+- [x] Export one result, or all result tabs (Ref: `ExportResultWindow`, `ExportMultipleResultsWindow`). Each one's statement runs again on the export's connection
 
 ## 12. Saved queries and history
 
 - [x] History for each connection, grouped and searchable, click to reopen
-- [ ] Keep history 1, 2 or 3 years, or forever; clear history; history stored in a file, not localStorage
-- [ ] Saved queries (favorites): folders, rename, open in a tab, add from history, shared folder on disk (Ref: `LeftSidebarController` "Queries")
-- [ ] A favorite can be an autocomplete snippet with keywords (Ref: `FavoriteEditorWindow`)
-- [ ] Console log: every statement the app sends, with syntax highlighting, and a clear button (Ref: `CommandLoggerController`)
+- [x] Keep history 1, 2 or 3 years, or forever (Settings › General; at most 5,000 per connection); clear history; history stored in a file, not localStorage
+- [x] Saved queries (favorites): folders, rename, open in a tab, add from history (right-click) or the editor (Save Query as Favorite…), per connection in `favorites.json` beside the SQL tabs, so Settings › Locations puts them in a shared folder (Ref: `LeftSidebarController` "Queries"). Not done: drag and drop between folders (the edit dialog moves them), nested folders, a folder of `.sql` files
+- [x] A favorite can be an autocomplete snippet with keywords (Ref: `FavoriteEditorWindow`)
+- [x] Console log: every statement the app sends, with syntax highlighting, and a clear button (Ref: `CommandLoggerController`). Recorded in db.rs where statements go out (the last 1,000; bound values show as placeholders), all connections in one log; the panel (⇧⌘C) reads it while open
 
 ## 13. Import and export
 
