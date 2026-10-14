@@ -165,7 +165,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [~] Search and replace within a result (Ref: `QueryResultController`). Search filters the shown result's rows; no replace
 - [x] Load more rows: a read-only statement whose result was cut runs again with room for another row limit's worth
 - [x] Edit results from a single-table query in place, the same as the data grid. Only a plain `SELECT … FROM one_table [WHERE/ORDER/LIMIT]` whose columns are all the table's own, key included; not in the one-tab mode or while searching. Saving runs the statement again
-- [ ] Charts from results: line, bar and pie, with x and y axis pickers; add a chart to the Metrics Board
+- [x] Charts from results: line, bar and pie, with x and y axis pickers (several y series for line and bar), in place of the grid (the strip's Chart button); add a chart to the Metrics Board. Plain SVG, no chart library; a tooltip on hover and arrow keys
 - [x] Export one result, or all result tabs (Ref: `ExportResultWindow`, `ExportMultipleResultsWindow`). Each one's statement runs again on the export's connection
 
 ## 12. Saved queries and history
@@ -206,9 +206,9 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 17. Metrics board
 
-- [ ] Dashboard canvas made of widgets: data table, scoreboard, bar, line and pie charts, exporter, importer, input field, button, dropdown, connection (Ref: `MetricsBoardWindow`, `Metrics*View`)
-- [ ] Widgets bound to queries, with inputs feeding into query parameters
-- [ ] Auto-refresh, lock board, grid, several boards, import and export a board
+- [x] Dashboard canvas made of widgets: data table, scoreboard, bar, line and pie charts, exporter, importer, input field, button, dropdown, connection (Ref: `MetricsBoardWindow`, `Metrics*View`). Opens over the workspace (Tools › Metrics Board); the connection widget picks which open connection the board runs on
+- [x] Widgets bound to queries, with input fields and dropdowns feeding named query parameters (the editor's parameter format). A query that may change data runs only from its widget's own Run button, after asking; auto-refresh and parameter changes skip it, and skip what safe mode wants approved
+- [~] Auto-refresh (per board or per widget), lock board, grid (drag to move and resize), several boards per connection, import and export a board (JSON with a version). No TablePlus-style event wiring between widgets: a parameter change refreshes the widgets using it, a button refreshes the board. Moving and resizing is pointer-only
 
 ## 18. Safety and security
 
