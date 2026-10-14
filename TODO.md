@@ -30,7 +30,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] SSL: Disable / Prefer / Require / Verify CA / Verify full for every engine, with libpq semantics (Prefer and Require encrypt without checking the certificate), CA, client cert and key files with file pickers; TLS is checked against the real host name through SSH tunnels (Ref: `PostgreSQLForm`, `MySQLForm`)
 - [x] Postgres options: direct TLS negotiation, show system schemas, disable channel binding (More options in the form)
 - [x] MySQL options: socket instead of host (not yet tried against a real socket), SNI name, cleartext auth plugin
-- [ ] MySQL `LOAD DATA LOCAL INFILE`: the server picks which local file the client sends, so a blanket switch lets any server read your files. Only allow files named in the statement being run
+- [x] MySQL `LOAD DATA LOCAL INFILE`: the server picks which local file the client sends, so a blanket switch lets any server read your files. A statement that starts with `LOAD DATA … LOCAL INFILE '<file>'` sends that file and only that file, once, whatever the server asks for; any other request is refused
 - Not needed: TablePlus's MySQL "dialect" picks between its bundled 5.7 and 9.7 client libraries; the pure-Rust driver talks to old and new servers alike
 - [x] SQLite: open SQLCipher-encrypted files with a passphrase (or raw `x'…'` key) kept in the keychain; uses CommonCrypto on macOS, the system libcrypto on Linux
 - [x] Bootstrap commands: SQL run after connecting (and on every reopen), and a shell script run before connecting and before any SSH tunnel (Ref: `StartupQueryPopover`)
@@ -217,7 +217,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Toolbar lock icon to switch the level quickly (leaving a Safe level wants the password)
 - [x] Unlock safe mode with Touch ID (`robius-authentication`; macOS only)
 - [x] App passcode: lock at startup and after N minutes away; unlock with Touch ID; change passcode (Ref: `PasscodeWindow`)
-- [ ] Passcode lock in the backend: today the lock is the UI's, so commands (and the MCP server) still answer while locked
+- [x] Passcode lock in the backend: while locked, every database request is refused, the MCP server's included (the app starts locked until it knows whether a passcode is set)
 - [ ] Run all at Safe 1 with Touch ID prompts once per statement; remember the approval for the batch
 - [ ] Undo note: say that DDL statements can't be rolled back when a commit fails partway
 
@@ -241,7 +241,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [ ] One-click setup that edits an agent's config file (back it up first; never rewrite a config that doesn't parse)
 - [x] Activity log of tool calls, viewable and clearable (Ref: `MCPIntegrationsActivityWindow`)
 - [ ] Connected clients list; disconnect clients (the server is stateless, so there are no sessions to list yet)
-- [ ] Read-only tokens: also run their queries in a read-only transaction, so a SELECT calling a side-effect function can't write
+- [x] Read-only tokens: also run their queries in a read-only transaction (SQLite: `query_only`), so a SELECT calling a function that writes can't
 
 ## 21. Plugins and custom scripts
 
@@ -295,10 +295,10 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 Rules live in [CLAUDE.md](CLAUDE.md). Done so far: strict lints, typed errors, bound SQL parameters, secrets in `SecretString`, connect timeout, safe file writes, `npm run check`.
 
 - [ ] Install `cargo-audit` and `cargo-deny`; add `deny.toml` (license allowlist, no yanked crates, no unknown sources) and add both to `npm run check`
-- [ ] One lock per connection instead of one global lock, and SQLite calls in `spawn_blocking` (a slow query on one connection currently blocks the rest)
-- [ ] Safe mode: SELECTs that call side-effect functions (`pg_terminate_backend`, `nextval`, `lo_unlink`) or `SELECT … INTO OUTFILE` still count as read-only; mark them as writes
+- [~] One lock per connection instead of one global lock (done: a slow query holds up only its own connection, and keep-alive skips busy ones). Still missing: SQLite calls in `spawn_blocking` (they block one async worker thread meanwhile)
+- [~] Safe mode: SELECTs that call built-in side-effect functions (`nextval`, `pg_terminate_backend`, `lo_unlink`, `dblink`, `load_extension`…) and `SELECT … INTO` count as writes (done). Still missing: user-defined functions that write (MCP read-only tokens are covered by a read-only transaction; the editor isn't)
 - [ ] Property tests (`proptest`) for the read-only check and identifier quoting; fuzz the read-only check with `cargo fuzz`
-- [ ] Size limits on imports (CSV, JSON, SQL files) and on cell values loaded from files once those features exist
+- [x] Size limits on imports (CSV and SQL records 64 MB, 4,096 fields, JSON files 100 MB) and on cell values loaded from files (20 MB)
 
 ## Not copying
 
