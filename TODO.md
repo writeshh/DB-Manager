@@ -234,7 +234,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 ## 20. MCP server
 
 - [x] Built-in MCP server with stdio bridge binary (like `tableplus-mcp`): streamable HTTP on 127.0.0.1 (rmcp, stateless), `tableminus-mcp` bridge; tools list_connections, list_tables, describe_table, run_query (row limit and query timeout apply)
-- [ ] Ship the bridge inside the app bundle (Tauri `externalBin` needs a target-triple copy of `tableminus-mcp` before `tauri build`); until then build it with `cargo build --bin tableminus-mcp`
+- [x] Ship the bridge inside the app bundle: `npm run bundle` (scripts/build.sh) builds `tableminus-mcp`, copies it in as a Tauri external binary through `src-tauri/tauri.bundle.json`, and it lands next to the app's executable
 - [x] Access tokens: create, name, choose which connections each token can reach, read-only or read-write, revoke; the value is shown once (Ref: `MCPTokenSetupWindow`)
 - [x] Auto-generated token for the local bridge (`mcp-bridge.json`, mode 0600; revoking it rotates it)
 - [x] Approval needed for unsafe queries (on by default; a connection in safe mode always asks; read-only tokens never write)
@@ -289,7 +289,7 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 
 - [x] Menu bar matching TablePlus: File, Edit, View, Navigate, Connection, Tools, Window, Help (`menu.ts`, Tauri's menu API, built from the command list and rebuilt when a shortcut changes). Not yet tried in the app window
 - [ ] App updater (Tauri updater) with a changelog
-- [ ] Release builds: `.dmg` for macOS, AppImage and `.deb` for Linux
+- [~] Release builds: `npm run bundle` runs the checks and audit, then makes the `.app` and `.dmg` on macOS (done). Still missing: Developer ID signing and notarization (builds are ad-hoc signed, so other Macs block them), and trying the AppImage/`.deb` build on Linux
 - [ ] Linux fallback when there's no Secret Service: an encrypted file protected by a master password
 - [ ] Move history, saved queries and settings out of localStorage into files in the data folders (needed for section 22 Locations)
 
