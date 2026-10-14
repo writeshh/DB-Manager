@@ -76,9 +76,9 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Double-click to edit a cell, with staged changes highlighted
 - [x] Save (⌘S) and Discard, ⌘⌫ sets NULL
 - [x] Virtualized grid so large pages scroll smoothly (only rows near the viewport are drawn; arrow keys move the selection, Shift extends it, Enter edits)
-- [ ] Page settings: page size, jump to an offset, estimated count for tables above a threshold with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
+- [x] Page settings: click the row range in the footer for rows per page, the row to start at, and the count; tables the catalog estimates above a threshold (Settings › Table Data; Postgres `reltuples`, MySQL `table_rows`, SQLite always exact) show "~N" with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
 - [x] Sort by clicking a column header (ascending, descending, off); Shift-click sorts on several columns
-- [ ] Default sort setting (none / primary key ascending / descending)
+- [x] Default sort setting (none / primary key ascending / descending), Settings › Table Data
 - [x] Show and hide columns (Columns in the footer) and resize them (drag a header edge, double-click to fit), remembered per connection and table
 - [ ] Reorder columns by dragging headers
 - [x] Add row, duplicate rows, delete rows (staged like edits; ⌘⌫ deletes the selected rows, again restores them)
