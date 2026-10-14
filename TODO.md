@@ -75,7 +75,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Paged table data (300 rows per page) with next and previous page
 - [x] Double-click to edit a cell, with staged changes highlighted
 - [x] Save (⌘S) and Discard, ⌘⌫ sets NULL
-- [ ] Virtualized grid so large pages scroll smoothly
+- [x] Virtualized grid so large pages scroll smoothly (only rows near the viewport are drawn; arrow keys move the selection, Shift extends it, Enter edits)
 - [ ] Page settings: page size, jump to an offset, estimated count for tables above a threshold with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
 - [x] Sort by clicking a column header (ascending, descending, off); Shift-click sorts on several columns
 - [ ] Default sort setting (none / primary key ascending / descending)
