@@ -44,15 +44,15 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab (and closes the workspace on the last one)
 - [x] Open a database (⌘K), and connect without picking a database first
 - [x] Status pill showing the connection and server version
-- [ ] Rename tab, close other tabs, reopen closed tab, select tab 1–9 (⌘1…⌘9), next and previous tab
-- [ ] Split pane right, and next and previous pane
-- [ ] Multiple workspaces (connections) in one window, with a workspace switcher, next and previous workspace
-- [ ] New window, new workspace
-- [ ] Open Anything (⌘P): fuzzy search across tables, views, functions, saved queries and commands (Ref: `OpenAnythingController`)
+- [x] Rename tab (double-click or right-click it), close other tabs, reopen closed tab (⌘⇧T), select tab 1–9 (⌘1…⌘9, 9 is the last), next and previous tab (⌘⇧] / ⌘⇧[, ⌃Tab / ⌃⇧Tab)
+- [~] Split pane right (⌘⇧D), and next and previous pane (⌘⌥] / ⌘⌥[); each pane has its own tabs, Back/Forward and closed tabs (done). Still missing: only the focused pane is live; the others show a still copy of their last frame until clicked (the grid and editor draw into one place)
+- [x] Multiple workspaces (connections) in one window: click the connection name for the switcher (Show All Workspaces), next and previous workspace (⌃⌘] / ⌃⌘[), Reconnect All Workspaces; a lost connection in the background shows on the switcher
+- [~] New workspace (⌘N: the launcher, with the open workspaces kept) done. Still missing: new window
+- [x] Open Anything (⌘P): fuzzy search across tables, views, materialized views, functions, sequences, types, SQL tabs, other workspaces and commands, with arrow keys and Enter (Ref: `OpenAnythingController`). Saved queries join when section 12 has them
 - [ ] Toolbar: connection, database, SQL file, reload, safe-mode level, console log, row detail, metrics, user management (Ref: `WorkspaceWindow`)
 - [ ] Toggle the left sidebar, right sidebar, bottom console and results pane
-- [ ] Reload current tab (⌘R), reload workspace
-- [ ] Go back and forward through opened items
+- [x] Reload current tab (⌘R), reload workspace (⌘⌥R)
+- [x] Go back and forward through opened items (⌃⌘← / ⌃⌘→)
 - [ ] Database window: create, rename and drop databases; open in a new or the current tab (Ref: `DatabaseWindow`, `NewDatabaseWindow` with encoding and collation)
 - [ ] Notifications panel for finished background jobs (exports, imports, backups)
 
@@ -60,14 +60,14 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 - [x] Table list with a name filter
 - [~] Expand a table to see its columns (done). Still missing: sort columns A–Z or by position
-- [ ] Sections for schemas, tables, views, materialized views, functions and procedures, sequences, user-defined types, and recently used items, each one switchable on or off
-- [ ] Schema switcher; load system schemas; lazy-load large schemas
-- [ ] Item groups: add items by hand, or by filter rules such as "name has prefix" (Ref: `ItemGroupWindow`, `FilterRuleController`)
-- [ ] Pin items to the top
+- [~] Sections for tables, views, materialized views, functions and procedures, sequences and user-defined types, collapsible, each switchable on or off (right-click the sidebar); `catalog.rs`. Still missing: recently used items
+- [~] Schema switcher on Postgres (one schema or all, kept per connection); system schemas follow the connection's "Show system schemas" option. Still missing: lazy-loading large schemas
+- [~] Item groups by name rules (starts with, ends with, contains, is), right-click the sidebar for New group, a group's heading to edit or delete it (Ref: `ItemGroupWindow`, `FilterRuleController`). Still missing: adding items by hand
+- [x] Pin items to the top (right-click an item)
 - [ ] Item context menu: open in new tab, open structure, item overview, show diagram, copy name, Copy Script As (CREATE, DROP, …), select top 100, insert into the SQL editor, export, import, clone, truncate, delete
 - [ ] New: table, view, materialized view, function or procedure, schema
-- [ ] Search in database: find text across every table, with contains, not contains, prefix and suffix (Ref: `LeftSidebarController`)
-- [ ] Item overview: rows, size, created date (Ref: `ItemOverviewController`, `DefinitionPopover`)
+- [x] Search in database (the sidebar's Search tab): find text across every table, with contains, not contains, prefix and suffix; one table at a time with Stop, values bound as escaped LIKE patterns, counts capped at 1,000 per table; a result opens the table filtered (Ref: `LeftSidebarController`)
+- [x] Item overview (right-click › Overview…): rows (estimated on Postgres and InnoDB, exact on SQLite), size, created date on MySQL (Ref: `ItemOverviewController`, `DefinitionPopover`)
 
 ## 5. Data grid
 
@@ -254,7 +254,7 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [ ] SQL Editor: auto-save queries, uppercase keywords, close braces and quotes, complete with Enter or Tab, indent style and width, key binding, query parameter format (Ref: `SettingEditorController`)
 - [ ] Security: safe-mode default, passcode, auto-lock time, Touch ID (Ref: `SettingSecurityController`)
 - [ ] Locations: folders for connections, queries and history, and other data (so it can live in iCloud or Dropbox); restore defaults (Ref: `SettingLocationController`)
-- [ ] Shortcuts: rebind every menu command, with conflict detection (Ref: `SettingShortcutKeyController`)
+- [x] Shortcuts: rebind every command (click its shortcut, press the new keys), with conflict detection, clear, reset one or all; kept with the other settings (Ref: `SettingShortcutKeyController`). Commands live in `commands.ts`, which feeds the keyboard, the menu bar and Open Anything
 - [ ] Fonts and themes: see section 23
 - [ ] AI: see section 19
 - [x] MCP: see section 20
@@ -280,7 +280,7 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 
 ## 25. App and platform
 
-- [ ] Menu bar matching TablePlus: File, Edit, View, Navigate, Connection, Tools, Window, Help
+- [x] Menu bar matching TablePlus: File, Edit, View, Navigate, Connection, Tools, Window, Help (`menu.ts`, Tauri's menu API, built from the command list and rebuilt when a shortcut changes). Not yet tried in the app window
 - [ ] App updater (Tauri updater) with a changelog
 - [ ] Release builds: `.dmg` for macOS, AppImage and `.deb` for Linux
 - [ ] Linux fallback when there's no Secret Service: an encrypted file protected by a master password
