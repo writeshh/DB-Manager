@@ -39,4 +39,4 @@ Sources: [Apollo Rust best practices](https://github.com/apollographql/rust-best
 
 **Release**
 - `overflow-checks = true` and `panic = "unwind"` stay in the release profile.
-- Before a release: `cargo audit` and `cargo deny check` (see TODO.md section 26).
+- Before a release, and after adding or upgrading a dependency: `npm run audit` (`cargo deny check` and `cargo audit`; install them with `cargo install --locked cargo-deny cargo-audit`). An ignored advisory needs its reason in `src-tauri/deny.toml`.

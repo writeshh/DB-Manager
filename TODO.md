@@ -294,7 +294,7 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 
 Rules live in [CLAUDE.md](CLAUDE.md). Done so far: strict lints, typed errors, bound SQL parameters, secrets in `SecretString`, connect timeout, safe file writes, `npm run check`.
 
-- [ ] Install `cargo-audit` and `cargo-deny`; add `deny.toml` (license allowlist, no yanked crates, no unknown sources) and add both to `npm run check`
+- [x] `cargo-audit` and `cargo-deny` with `deny.toml` (license allowlist, advisories, no unknown sources): `npm run audit`. Kept out of `npm run check` because it fetches the advisory database. One ignored advisory, RUSTSEC-2023-0071 (rsa via russh, no fix released; reason in `deny.toml`)
 - [~] One lock per connection instead of one global lock (done: a slow query holds up only its own connection, and keep-alive skips busy ones). Still missing: SQLite calls in `spawn_blocking` (they block one async worker thread meanwhile)
 - [~] Safe mode: SELECTs that call built-in side-effect functions (`nextval`, `pg_terminate_backend`, `lo_unlink`, `dblink`, `load_extension`…) and `SELECT … INTO` count as writes (done). Still missing: user-defined functions that write (MCP read-only tokens are covered by a read-only transaction; the editor isn't)
 - [ ] Property tests (`proptest`) for the read-only check and identifier quoting; fuzz the read-only check with `cargo fuzz`
