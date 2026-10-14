@@ -212,10 +212,12 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 ## 18. Safety and security
 
 - [x] Confirm before running writes (`sqlparser` read-only check)
-- [ ] TablePlus's five levels, set per connection plus a default for new connections: Silent; Alert 1 (warn on every query); Alert 2 (warn except SELECT/EXPLAIN/SHOW); Safe 1 (ask for the database password on every query); Safe 2 (ask for the password except reads) (Ref: `SettingSecurityController`)
-- [ ] Toolbar lock icon to switch the level quickly
-- [ ] Unlock safe mode with Touch ID
-- [ ] App passcode: lock at startup and after N minutes away; unlock with Touch ID; change passcode (Ref: `PasscodeWindow`)
+- [x] TablePlus's five levels, set per connection plus a default for new connections: Silent; Alert 1 (warn on every query); Alert 2 (warn except SELECT/EXPLAIN/SHOW); Safe 1 (ask for the database password on every query); Safe 2 (ask for the password except reads) (Ref: `SettingSecurityController`)
+- [x] Toolbar lock icon to switch the level quickly (leaving a Safe level wants the password)
+- [x] Unlock safe mode with Touch ID (`robius-authentication`; macOS only)
+- [x] App passcode: lock at startup and after N minutes away; unlock with Touch ID; change passcode (Ref: `PasscodeWindow`)
+- [ ] Passcode lock in the backend: today the lock is the UI's, so commands (and the MCP server) still answer while locked
+- [ ] Run all at Safe 1 with Touch ID prompts once per statement; remember the approval for the batch
 - [ ] Undo note: say that DDL statements can't be rolled back when a commit fails partway
 
 ## 19. AI
@@ -252,8 +254,9 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [ ] General: language, beta updates, turn off auto-update, reopen workspaces at startup, ⌘T opens a SQL tab or an empty tab, query timeout, keep alive, CSV defaults, report crashes (opt-in) (Ref: `SettingGeneralController`)
 - [ ] Table: estimate count above N rows (default 500,000), PostGIS → WKT, auto-hide scrollbars, open the folder after export (Ref: `SettingTableController`)
 - [ ] SQL Editor: auto-save queries, uppercase keywords, close braces and quotes, complete with Enter or Tab, indent style and width, key binding, query parameter format (Ref: `SettingEditorController`)
-- [ ] Security: safe-mode default, passcode, auto-lock time, Touch ID (Ref: `SettingSecurityController`)
-- [ ] Locations: folders for connections, queries and history, and other data (so it can live in iCloud or Dropbox); restore defaults (Ref: `SettingLocationController`)
+- [x] Security: safe-mode default, passcode, auto-lock time, Touch ID (Ref: `SettingSecurityController`)
+- [x] Locations: folders for connections, queries and history (so it can live in iCloud or Dropbox); restore defaults (Ref: `SettingLocationController`)
+- [ ] Locations: "other data" (MCP settings, settings and themes still in localStorage)
 - [ ] Shortcuts: rebind every menu command, with conflict detection (Ref: `SettingShortcutKeyController`)
 - [ ] Fonts and themes: see section 23
 - [ ] AI: see section 19
@@ -262,10 +265,10 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 ## 23. Themes and appearance
 
 - [x] Light, dark and auto
-- [ ] Theme editor: every UI color (sidebar, tabs, grid, editor syntax, chart colors, status colors), editor and grid fonts, padding (Ref: `SettingThemeController`)
-- [ ] Bundled themes (TablePlus ships Jade, Polaris, Silver and Sunset) plus import and export of theme JSON
+- [x] Theme editor: every UI color (sidebar, tabs, grid, editor syntax, status colors; chart colors once there are charts), editor and grid fonts, padding (Ref: `SettingThemeController`)
+- [x] Bundled themes (our own: Paper, Harbor, Ember, Lagoon) plus import and export of theme JSON
 - [ ] Install themes from a Git repository and update them (Ref: `ThemeGitController`)
-- [ ] Separate light and dark defaults for Auto
+- [x] Separate light and dark defaults for Auto
 
 ## 24. More engines
 
