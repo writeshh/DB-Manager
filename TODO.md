@@ -229,7 +229,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 ## 19. AI
 
 - [x] Assistant pane: chat that writes SQL with the schema (tables, columns, types, foreign keys) as context, SQL blocks with Insert and Copy, chat history per connection in `ai-chats.json` next to the query history (Ref: `AIChatViewController`, `AIChatContextViewController`)
-- [~] Providers: Anthropic and OpenAI-compatible (custom base URL: OpenAI, Ollama, LM Studio…), API keys in the keychain, HTTPS only except to this computer (done, `ai.rs`). Still missing: Claude Code / Codex / other agents over ACP, GitHub Copilot, and an HTTPS proxy setting (Ref: `OpenAICompatibleConfigView`, `GitHubCopilotConfigView`)
+- [~] Providers: Anthropic and OpenAI-compatible (custom base URL: OpenAI, Ollama, LM Studio…), API keys in the keychain, HTTPS only except to this computer (done, `ai.rs`). An HTTP proxy (CONNECT tunnel, no proxy password yet) in Settings › AI. Still missing: Claude Code / Codex / other agents over ACP, GitHub Copilot (Ref: `OpenAICompatibleConfigView`, `GitHubCopilotConfigView`)
 - [x] Approve each query the AI wants to run: Run or Don't run in the chat; it runs only when the parse calls it read-only, inside read-only bounds, at most 50 rows, and safe mode password levels still ask (Ref: `AIQueryApprovalPopover`)
 - [x] Consent notice that prompts go to the provider: the assistant is off until turned on under the notice (Settings › AI)
 
