@@ -42,6 +42,8 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 ## 3. Workspace window
 
 - [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab (and closes the workspace on the last one)
+- [ ] Fix: closing the last item tab closes the workspace and disconnects (`main.ts`, the `closeWorkspace()` call when no tabs are left, there on purpose to match TablePlus). Keep the connection open instead and show an empty workspace (e.g. a fresh SQL tab or an empty state); leaving the connection stays with the workspace tab's × and Disconnect
+- [ ] Rework the sidebar's ‹ Connections button (`#back`, `main.ts` calls `closeWorkspace()`): it disconnects the current workspace and drops the user on the launcher to open a connection again. Make it show the connections without closing anything (e.g. open the launcher as a New workspace tab, like ⌘N, so the current connection stays open in its tab)
 - [x] Open a database (⌘K), and connect without picking a database first
 - [x] Status pill showing the connection and server version
 - [x] Rename tab (double-click or right-click it), close other tabs, reopen closed tab (⌘⇧T), select tab 1–9 (⌘1…⌘9, 9 is the last), next and previous tab (⌘⇧] / ⌘⇧[, ⌃Tab / ⌃⇧Tab)
@@ -56,6 +58,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Go back and forward through opened items (⌃⌘← / ⌃⌘→)
 - [x] Database window (⌘K): create (encoding/character set and collation), rename and drop databases on Postgres and MySQL/MariaDB, each through the SQL preview and safe mode; open in the current tab or a new one (Ref: `DatabaseWindow`, `NewDatabaseWindow`). MySQL has no RENAME DATABASE: its tables move to a new database and the old one is dropped, refused when it has views, routines, triggers or events. Postgres can't rename or drop the database a session is on (the server says so)
 - [ ] Notifications panel for finished background jobs (exports, imports, backups)
+- [ ] Resizable panes: drag the sidebar's right edge (now a fixed 248px, `#workspace` grid in `styles.css`), the split between the SQL editor and its results (`.sql-pane`, a fixed 38% height), and the console panel's top edge (`.console`, a fixed 30% height in `results.css`) to resize them. Clamp to sensible minimums, double-click a divider to reset, keep the sizes per window across launches, and give each divider a keyboard path (focusable, arrow keys)
 
 ## 4. Left sidebar
 
@@ -69,6 +72,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] New: table, view, materialized view (Postgres), function, procedure (not SQLite), schema (Postgres), from the sidebar's right-click menu. Views and routines open an editor and are created through the preview
 - [x] Search in database (the sidebar's Search tab): find text across every table, with contains, not contains, prefix and suffix; one table at a time with Stop, values bound as escaped LIKE patterns, counts capped at 1,000 per table; a result opens the table filtered (Ref: `LeftSidebarController`)
 - [x] Item overview (right-click › Overview…): rows (estimated on Postgres and InnoDB, exact on SQLite), size, created date on MySQL (Ref: `ItemOverviewController`, `DefinitionPopover`)
+- [ ] Fix: the sidebar's Items / History / Queries / Search segment is crammed, four labels squeezed into the 248px sidebar. Drop the Queries tab: saved queries are favorites kept from history, so show them as a collapsible Saved queries section at the top of the History pane (folders inside it as now). That leaves three tabs with room to breathe
 
 ## 5. Data grid
 
@@ -93,6 +97,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Render PostGIS geometry as WKT (setting, on by default): extended WKT (`SRID=4326;POINT(1 2)`), which also reads back in when edited
 - [x] Data-rendering settings: alternating row colors (Appearance), thin grid scroll bars shown only while the pointer is over the grid (Settings › Data)
 - [x] Log the original values when updating or deleting (setting): each changed row's values go to the console log as a comment before its statement
+- [ ] Polish: the table footer's Filters, Columns and Export… buttons (`#table-foot` in `index.html`) look like loose grey text next to the Data / Structure segment, with only a blue text colour showing that Filters is on; restyle them with `/design-taste-frontend` so they read as controls and their on state is clear
 
 ## 6. Filters
 
@@ -104,6 +109,8 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Quick filter from a cell: right-click → filter rows with this value (IS NULL for NULL cells)
 - [x] Filter defaults (Settings › General): a new row's column (any, first, primary key) and operator, and whether a table opens with the filter bar showing (our reading of TablePlus's "Default Filter State"). Still missing: TablePlus's "Default Filter Column Sort"
 - [x] Export the filtered result (Export… in the filter bar or the footer): every matching row or only the current page
+- [ ] Fix: the filter bar's Value field can't be typed into in the app (seen on a MySQL table with column `id`, operator contains); it takes focus and shows the caret, but no text goes in. Check whether it's a regression from the brand restyle
+- [ ] Fix: the filter row's icon buttons (▸ apply only this, ⧉ duplicate, − remove, + add) are tiny and faint; make the glyphs larger and darker with bigger hit targets. They're `ghost` buttons built as text glyphs in `filters.ts`, so they get the muted colour and small padding
 
 ## 7. Right sidebar
 
@@ -153,7 +160,9 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Open (⌘O) and save (⌘S, Save as ⌘⇧S) `.sql` files in SQL tabs; files up to 20 MB, saved through a temporary file (dialogs not yet tried in the app window)
 - [ ] New SQL Viewer window (Ref: `SQLViewerWindow`)
 - [x] SQL tabs are saved per connection and reopened on connect (Settings › Editor, on by default)
+- [ ] Fix: keep each database's SQL tabs. Today they're kept per connection (`sql_tabs` keyed by the connection name in `main.ts`) and only from the connection's first workspace tab (`keepsTabs`), so a second database of the same connection (⌘K › Open in a new tab) loses what was written, and every database shares one set. Key them by connection and database, save from every workspace, keep autosaving as you type (the 400 ms `saveSqlTabsSoon`), and flush the pending save when a tab, workspace or connection closes and when the app quits, so reconnecting to that database reopens its own SQL
 - [x] Explain: the plan for the statement under the cursor (EXPLAIN, or EXPLAIN QUERY PLAN on SQLite); safe mode treats EXPLAIN of a query as read-only
+- [ ] Polish: the editor's find and replace panel (CodeMirror's `.cm-search`) looks unstyled: grey bevelled native buttons (next, previous, all, replace, replace all) and checkboxes stacked one per row with their labels pushed right, because the app's global `label { display: grid; grid-template-columns: 96px 1fr }` reaches into the panel. Restyle it with `/design-taste-frontend`: one compact row for find with inline toggles for match case, regexp and by word, one for replace, buttons matching the app's pills, and scope the form `label` rule so it stops leaking into the editor
 
 ## 11. Query results
 
@@ -193,6 +202,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Backup: pick connection and database, tool version, extra options (`--data-only`, `--schema-only`, …), gzip, file name (Ref: `BackupWindow`). Launcher right-click or the workspace's Tools menu; runs in the background with progress and cancel (bottom-right panel). SQLite uses the online backup API (SQLCipher files stay encrypted). Postgres also offers the custom archive format
 - [x] Restore into an existing or new database (Ref: `RestoreWindow`). Always confirmed; safe mode is enforced in Rust too. Gzip and pg_dump archives are detected from the file (archives go to pg_restore, scripts to psql with ON_ERROR_STOP). SQLite copies the backup back over the file with the backup API
 - [x] Use `pg_dump`/`pg_restore` and `mysqldump`/`mysql`, matched to the server version; pass passwords through environment variables, never in command arguments. Found on PATH, Homebrew, Postgres.app and DBngin; the oldest same-flavour version not older than the server wins, or Choose… a folder. SSH tunnels and TLS mode/files are mirrored (libpq conninfo with `hostaddr`; MySQL `--ssl-mode`, MariaDB `--ssl` flags). Not yet: a connect timeout for mysqldump (it has no flag; Cancel covers it), MySQL VERIFY_IDENTITY through a tunnel checks 127.0.0.1
+- [ ] Show in Finder on a finished backup: the job card (`backup.ts`) says Done with the file name and size but only offers Dismiss. Add a button that reveals the file in its folder (`@tauri-apps/plugin-opener`'s `revealItemInDir`, already a dependency; check the capability allows it), named for the platform (Show in Finder / Show in Explorer / Show in folder). Same for finished exports
 
 ## 15. Admin tools
 
@@ -273,6 +283,8 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [x] Bundled themes (our own: Paper, Harbor, Ember, Lagoon) plus import and export of theme JSON
 - [ ] Install themes from a Git repository and update them (Ref: `ThemeGitController`)
 - [x] Separate light and dark defaults for Auto
+- [ ] Fix: shortcut hints on buttons (`kbd`, e.g. ⌘↩ on Run, ⇧⌘↩ on Run all, ⌘I on Format) are too small and faint to read; make them larger (`kbd` in `styles.css`: 11px at 0.75 opacity)
+- [ ] Fix: input fields look inconsistent across the app; restyle them with `/design-taste-frontend` so text inputs, selects and textareas share one look everywhere. Seen in the filter bar: the column and operator selects keep the native macOS square shape while the value input is a pill (WebKit ignores `border-radius` on selects without `appearance: none` and a custom chevron)
 
 ## 24. More engines
 
@@ -292,6 +304,8 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 - [~] Release builds: `npm run bundle` runs the checks and audit, then makes the `.app` and `.dmg` on macOS (done). Still missing: Developer ID signing and notarization (builds are ad-hoc signed, so other Macs block them), and trying the AppImage/`.deb` build on Linux
 - [ ] Linux fallback when there's no Secret Service: an encrypted file protected by a master password
 - [x] Move history, saved queries and settings out of localStorage into files in the data folders
+- [ ] New logo: a blue mockingbird (*Melanotis caerulescens*). Reference: perched, deep blue-black with scaled, glossy blue throat and breast feathers, a red eye, a slim dark bill and a long tail. Simplify it into a mark that keeps the brand's flat ink-and-primaries style and reads at 16px. Replaces the launcher's four-disc mark (`.mark` in `styles.css`) and the app icons in `src-tauri/icons/` (regenerate them with `npm run tauri icon` from one source image)
+- [ ] Custom title bar: the native macOS title bar is a strip of empty space above the workspace tabs. Replace it (Tauri `titleBarStyle: "Overlay"` with `hiddenTitle` in `tauri.conf.json`, and `data-tauri-drag-region` on the bar) and move items into it: the workspace tab strip beside the traffic lights, and candidates from the header such as the connection pill or Console / SQL. Keep empty parts draggable, double-click to zoom, and the traffic-light inset; Windows and Linux keep their native frame or get matching window buttons
 
 ## 26. Rust hygiene
 
