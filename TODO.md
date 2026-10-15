@@ -273,7 +273,7 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [x] Light, dark and auto
 - [x] Theme editor: every UI color (sidebar, tabs, grid, editor syntax, status colors; chart colors once there are charts), editor and grid fonts, padding (Ref: `SettingThemeController`)
 - [x] Bundled themes (our own: Paper, Harbor, Ember, Lagoon) plus import and export of theme JSON
-- [ ] Install themes from a Git repository and update them (Ref: `ThemeGitController`)
+- [x] Install themes from a Git repository and update them (Settings › Appearance › Install from Git…): a shallow `git clone` over https only (no other transports, no prompts, no LFS, two-minute limit) into a temporary folder; every `.json` at the top or in `themes/` is checked like an imported file. Update fetches again and replaces that repository's themes; Remove takes them out (`themes.rs`) (Ref: `ThemeGitController`)
 - [x] Separate light and dark defaults for Auto
 
 ## 24. More engines
