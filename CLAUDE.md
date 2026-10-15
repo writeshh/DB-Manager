@@ -4,6 +4,8 @@ Tauri 2 app: Rust core in `src-tauri/`, plain TypeScript UI in `src/`. The featu
 
 Before every commit run `npm run check` (tsc, rustfmt, clippy with warnings as errors, tests). It must pass.
 
+No Claude or AI attribution anywhere: no `Co-Authored-By`, `Claude-Session` or "Generated with Claude Code" lines in commits, PRs, comments or files. Commits are authored as `Ritesh Shrestha <shrestha.ritesh@hotmail.com>`, never as Claude.
+
 ## Rust rules
 
 Sources: [Apollo Rust best practices](https://github.com/apollographql/rust-best-practices), [Corgea Rust security](https://corgea.com/learn/rust-security-best-practices), [kobogithub rust-best-practices](https://github.com/kobogithub/knowledge/tree/prod/skills/rust-best-practices). The lints in `Cargo.toml` enforce what they can; the rest is on review.
