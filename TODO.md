@@ -116,11 +116,11 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 - [x] Structure view: columns, indexes, foreign keys, checks and triggers in sections (`structure.ts`, `structure.rs`)
 - [~] Edit columns: add, drop, rename, change type, nullable, default, comment and auto-increment; staged, previewed as SQL, committed with ⌘S (done). Still missing: reorder (MySQL), length as its own field, and on SQLite changing a type, nullability or default (needs a table rebuild: create, copy, drop, rename) (Ref: `TableStructureController`)
-- [~] Indexes: list, add and drop with name, columns and unique flag (done). Still missing: choosing the method when adding (Ref: `TableIndexController`)
+- [x] Indexes: list, add and drop with name, columns, unique flag and method (Postgres btree, hash, gist, gin, brin, spgist; MySQL BTREE, HASH) (Ref: `TableIndexController`)
 - [x] Foreign keys: column, referenced table and columns, ON UPDATE and ON DELETE; on SQLite only when creating the table (Ref: `ForeignKeyPopover`)
 - [~] Triggers: listed (done). Still missing: add, edit and drop (Ref: `TriggerPopover`)
-- [~] Check constraints and the primary key: checks listed, primary key set when creating a table (done). Still missing: adding and dropping checks, changing an existing table's primary key
-- [~] Table options: name and comment (done). Still missing: engine and collation (MySQL)
+- [x] Check constraints and the primary key: checks listed, added (named, any SQL expression) and dropped; the primary key set when creating a table and changed on an existing one with the Key column (MySQL in one statement; Postgres drops the old constraint by name). SQLite only at creation (a rebuild otherwise)
+- [x] Table options: name and comment; MySQL's engine (from the server's) and default collation
 - [x] View the DDL of a table or view: MySQL `SHOW CREATE TABLE`, SQLite `sqlite_master`, Postgres written from the structure (Ref: `ViewDDLController`)
 - [x] View structure and definition editing: a view's Structure shows its columns and its SELECT in an editor, saved with ⌘S through the preview (CREATE OR REPLACE; materialized views and SQLite views are dropped and created again in one transaction). Postgres materialized views list no columns (the columns query reads `information_schema`, which leaves them out), so they can't be browsed either yet
 - [x] Function and procedure editor: the CREATE statement in an editor window, one per overload on Postgres (CREATE OR REPLACE). MySQL drops and creates the routine; if the new one fails, `run_ddl` puts the original back
