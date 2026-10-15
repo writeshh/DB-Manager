@@ -188,7 +188,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Import CSV wizard: preview the first 100 rows, header row, delimiter and quote, empty as NULL, match columns by name (case-insensitive optional) or order, create a new table of text columns, stop / skip / update on duplicates; batched INSERTs with bound values in one transaction (Ref: `ImportCSVWizardWindow`). Not done: encodings other than UTF-8
 - [x] Import JSON wizard: an array of objects, up to 100 MB (Ref: `ImportJSONWizardWindow`)
 - [x] Import SQL wizard: preview, run a `.sql` file statement by statement with progress, stopping at the first error (Ref: `ImportSQLWizardWindow`). Not done: MySQL's `DELIMITER` command
-- [~] CSV defaults in settings: Settings › Data › CSV export sets the delimiter, line break, header, quote-every-field and NULL-as-empty a new export starts with; the export dialog keeps its last choices in the same place (done). Still missing: the quote character and a decimal separator (the export writes numbers as the database returns them; both need backend support)
+- [x] CSV defaults in settings: Settings › Data › CSV export sets the delimiter, line break, quote (double or single), decimal separator (point or comma, for values that are plain decimal numbers), header, quote-every-field and NULL-as-empty a new export starts with; the export dialog keeps its last choices in the same place
 
 ## 14. Backup and restore
 
@@ -264,7 +264,7 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [x] Locations: folders for connections, queries and history (so it can live in iCloud or Dropbox); restore defaults (Ref: `SettingLocationController`)
 - [x] Locations: settings, themes, column layouts and the other remembered choices live in `settings.json` in their own Settings folder (prefs.ts), so they can sync between Macs. localStorage only keeps a copy for a fast start; the file wins, and settings found in a newly chosen folder apply at the next start. MCP settings stay in the config folder on purpose: their access tokens belong to one machine
 - [x] Shortcuts: rebind every command (click its shortcut, press the new keys), with conflict detection, clear, reset one or all; kept with the other settings (Ref: `SettingShortcutKeyController`). Commands live in `commands.ts`, which feeds the keyboard, the menu bar and Open Anything
-- [ ] Fonts and themes: see section 23
+- [x] Fonts and themes: see section 23
 - [x] AI: see section 19
 - [x] MCP: see section 20
 
