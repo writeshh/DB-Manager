@@ -251,7 +251,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 ## 21. Plugins and custom scripts
 
 - [x] Run custom script (Tools › Run Custom Script…): a JavaScript window that can query the current connection. The script runs in a Web Worker without the page or the app's backend; `query(sql)` (rows as objects), `execute(sql)` (every result), `print()` and `table()` come back to the page, and queries go through `run_query`, so safe mode asks as for the editor. Stop ends the worker; scripts open from and save to `.js` files, and the last one is kept (Ref: `CustomScriptWindow`)
-- [ ] Plugin manager: install, update and remove plugins; plugins run in a sandbox (QuickJS) with explicit permissions, not full access (Ref: `PluginWindow`)
+- [x] Plugin manager (Settings › Plugins, `plugins.rs`): install from a Git repository (https) or a folder, update, turn off, remove. A plugin is `plugin.json` plus one script; its actions go in the grid's row menu and the sidebar's table menu. Each action runs in its own QuickJS runtime (no files, network or app access; 64 MB, 10 seconds) and returns text to copy, SQL to insert or a message. The `query` permission (read-only SQL on the open connection, safe mode applies) is shown and granted at install. Example: `examples/plugins/json-tools` (Ref: `PluginWindow`)
 
 ## 22. Settings
 
