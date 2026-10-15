@@ -223,7 +223,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Unlock safe mode with Touch ID (`robius-authentication`; macOS only)
 - [x] App passcode: lock at startup and after N minutes away; unlock with Touch ID; change passcode (Ref: `PasscodeWindow`)
 - [x] Passcode lock in the backend: while locked, every database request is refused, the MCP server's included (the app starts locked until it knows whether a passcode is set)
-- [ ] Run all at Safe 1 with Touch ID prompts once per statement; remember the approval for the batch
+- [x] Run all at a Safe level asks once for the batch: with Touch ID, one prompt mints a short-lived grant (5 minutes, in memory, compared as a digest) that the rest of the statements send; a password was already resent without asking
 - [x] Undo note: the previews before structure, object and user changes say that MySQL commits each DDL statement as it runs, so the ones before a failure stay applied (elsewhere they run in one transaction); a failure partway lists the statements that had run
 
 ## 19. AI
