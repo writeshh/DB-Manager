@@ -56,7 +56,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Reload current tab (⌘R), reload workspace (⌘⌥R)
 - [x] Go back and forward through opened items (⌃⌘← / ⌃⌘→)
 - [x] Database window (⌘K): create (encoding/character set and collation), rename and drop databases on Postgres and MySQL/MariaDB, each through the SQL preview and safe mode; open in the current tab or a new one (Ref: `DatabaseWindow`, `NewDatabaseWindow`). MySQL has no RENAME DATABASE: its tables move to a new database and the old one is dropped, refused when it has views, routines, triggers or events. Postgres can't rename or drop the database a session is on (the server says so)
-- [ ] Notifications panel for finished background jobs (exports, imports, backups)
+- [x] Notifications for finished background jobs (exports, imports, backups, restores): every job's card stacks in one panel at the bottom right and stays until dismissed; the header's Jobs button (with a count of unseen ones) or View › Notifications lists this session's finished jobs, with Show in Finder. Not kept across launches
 - [x] Resizable panes: drag the sidebar's right edge, the SQL editor's bottom edge and the console's top edge (`splitters.ts`). Clamped (sidebar 180–560px and at most half the window, editor and console leave the results room), double-click or Home resets, focus a divider and use the arrow keys (16px, Shift 64px); sizes kept in settings across launches. Not yet: the row detail sidebar's width
 
 ## 4. Left sidebar
