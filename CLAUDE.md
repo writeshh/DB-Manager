@@ -26,7 +26,7 @@ Sources: [Apollo Rust best practices](https://github.com/apollographql/rust-best
 - Cap anything untrusted that drives an allocation or a loop (row counts, file sizes, import lengths).
 
 **Secrets**
-- Passwords and URLs holding passwords are `secrecy::SecretString`. Call `expose_secret()` only at the point of use. Never `Debug`, log or persist them; the keychain is the only store.
+- Passwords and URLs holding passwords are `secrecy::SecretString`. Call `expose_secret()` only at the point of use. Never `Debug`, log or persist them; the keychain is the only store (through `secrets.rs`, which falls back to its encrypted vault on Linux without a Secret Service).
 
 **Async**
 - Every network call has a timeout (`CONNECT_TIMEOUT` for connects).
