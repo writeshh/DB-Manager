@@ -245,7 +245,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Manual setup instructions for Claude Code, Cursor and other agents, and for HTTP with a token
 - [x] One-click setup that edits an agent's config file: Settings › MCP › Or add it for you (Claude Desktop, Cursor, Windsurf) adds or repoints the `tableminus` entry under `mcpServers`, keeping the file's other servers, settings, key order and the entry's `env`; the original is copied aside first, the write goes through a temporary file, and a file that isn't a JSON object is left untouched
 - [x] Activity log of tool calls, viewable and clearable (Ref: `MCPIntegrationsActivityWindow`)
-- [ ] Connected clients list; disconnect clients (the server is stateless, so there are no sessions to list yet)
+- [x] Connected clients list (Settings › MCP › Clients): each token that called since the app started, with the name and version the agent gave in `initialize`, its request count and when it last called. The server keeps no sessions, so Disconnect revokes the token (the bridge's token is rotated, so the bridge reconnects)
 - [x] Read-only tokens: also run their queries in a read-only transaction (SQLite: `query_only`), so a SELECT calling a function that writes can't
 
 ## 21. Plugins and custom scripts
