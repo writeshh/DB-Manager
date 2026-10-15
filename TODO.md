@@ -188,7 +188,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Import CSV wizard: preview the first 100 rows, header row, delimiter and quote, empty as NULL, match columns by name (case-insensitive optional) or order, create a new table of text columns, stop / skip / update on duplicates; batched INSERTs with bound values in one transaction (Ref: `ImportCSVWizardWindow`). Not done: encodings other than UTF-8
 - [x] Import JSON wizard: an array of objects, up to 100 MB (Ref: `ImportJSONWizardWindow`)
 - [x] Import SQL wizard: preview, run a `.sql` file statement by statement with progress, stopping at the first error (Ref: `ImportSQLWizardWindow`). Not done: MySQL's `DELIMITER` command
-- [ ] CSV defaults in settings: delimiter, quote, line break, decimal. For now the export dialog remembers its last choices
+- [~] CSV defaults in settings: Settings › Data › CSV export sets the delimiter, line break, header, quote-every-field and NULL-as-empty a new export starts with; the export dialog keeps its last choices in the same place (done). Still missing: the quote character and a decimal separator (the export writes numbers as the database returns them; both need backend support)
 
 ## 14. Backup and restore
 
@@ -224,7 +224,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] App passcode: lock at startup and after N minutes away; unlock with Touch ID; change passcode (Ref: `PasscodeWindow`)
 - [x] Passcode lock in the backend: while locked, every database request is refused, the MCP server's included (the app starts locked until it knows whether a passcode is set)
 - [ ] Run all at Safe 1 with Touch ID prompts once per statement; remember the approval for the batch
-- [ ] Undo note: say that DDL statements can't be rolled back when a commit fails partway
+- [x] Undo note: the previews before structure, object and user changes say that MySQL commits each DDL statement as it runs, so the ones before a failure stay applied (elsewhere they run in one transaction); a failure partway lists the statements that had run
 
 ## 19. AI
 
