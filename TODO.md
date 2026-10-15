@@ -42,7 +42,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 ## 3. Workspace window
 
 - [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab; after the last one the workspace stays connected with no tab open, and ⌘W again closes the connection
-- [ ] Rework the sidebar's ‹ Connections button (`#back`, `main.ts` calls `closeWorkspace()`): it disconnects the current workspace and drops the user on the launcher to open a connection again. Make it show the connections without closing anything (e.g. open the launcher as a New workspace tab, like ⌘N, so the current connection stays open in its tab)
+- [x] The sidebar's ‹ Connections opens the launcher as a New workspace tab (like ⌘N); the workspace stays connected in its tab
 - [x] Open a database (⌘K), and connect without picking a database first
 - [x] Status pill showing the connection and server version
 - [x] Rename tab (double-click or right-click it), close other tabs, reopen closed tab (⌘⇧T), select tab 1–9 (⌘1…⌘9, 9 is the last), next and previous tab (⌘⇧] / ⌘⇧[, ⌃Tab / ⌃⇧Tab)
@@ -108,7 +108,6 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Quick filter from a cell: right-click → filter rows with this value (IS NULL for NULL cells)
 - [x] Filter defaults (Settings › General): a new row's column (any, first, primary key) and operator, and whether a table opens with the filter bar showing (our reading of TablePlus's "Default Filter State"). Still missing: TablePlus's "Default Filter Column Sort"
 - [x] Export the filtered result (Export… in the filter bar or the footer): every matching row or only the current page
-- [ ] Fix: the filter row's icon buttons (▸ apply only this, ⧉ duplicate, − remove, + add) are tiny and faint; make the glyphs larger and darker with bigger hit targets. They're `ghost` buttons built as text glyphs in `filters.ts`, so they get the muted colour and small padding
 
 ## 7. Right sidebar
 
@@ -197,10 +196,9 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 14. Backup and restore
 
-- [x] Backup: pick connection and database, tool version, extra options (`--data-only`, `--schema-only`, …), gzip, file name (Ref: `BackupWindow`). Launcher right-click or the workspace's Tools menu; runs in the background with progress and cancel (bottom-right panel). SQLite uses the online backup API (SQLCipher files stay encrypted). Postgres also offers the custom archive format
+- [x] Backup: pick connection and database, tool version, extra options (`--data-only`, `--schema-only`, …), gzip, file name (Ref: `BackupWindow`). Launcher right-click or the workspace's Tools menu; runs in the background with progress and cancel (bottom-right panel); a finished backup or export offers Show in Finder (Explorer, folder). SQLite uses the online backup API (SQLCipher files stay encrypted). Postgres also offers the custom archive format
 - [x] Restore into an existing or new database (Ref: `RestoreWindow`). Always confirmed; safe mode is enforced in Rust too. Gzip and pg_dump archives are detected from the file (archives go to pg_restore, scripts to psql with ON_ERROR_STOP). SQLite copies the backup back over the file with the backup API
 - [x] Use `pg_dump`/`pg_restore` and `mysqldump`/`mysql`, matched to the server version; pass passwords through environment variables, never in command arguments. Found on PATH, Homebrew, Postgres.app and DBngin; the oldest same-flavour version not older than the server wins, or Choose… a folder. SSH tunnels and TLS mode/files are mirrored (libpq conninfo with `hostaddr`; MySQL `--ssl-mode`, MariaDB `--ssl` flags). Not yet: a connect timeout for mysqldump (it has no flag; Cancel covers it), MySQL VERIFY_IDENTITY through a tunnel checks 127.0.0.1
-- [ ] Show in Finder on a finished backup: the job card (`backup.ts`) says Done with the file name and size but only offers Dismiss. Add a button that reveals the file in its folder (`@tauri-apps/plugin-opener`'s `revealItemInDir`, already a dependency; check the capability allows it), named for the platform (Show in Finder / Show in Explorer / Show in folder). Same for finished exports
 
 ## 15. Admin tools
 
