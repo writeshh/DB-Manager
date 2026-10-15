@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- TableMinus: a blue mockingbird (Melanotis caerulescens), perched. The plate follows the macOS icon grid. -->
+  <defs>
+    <clipPath id="plate"><rect x="64" y="64" width="896" height="896" rx="200"/></clipPath>
+    <clipPath id="bird">
+      <ellipse cx="480" cy="540" rx="250" ry="168" transform="rotate(-28 480 540)"/>
+      <circle cx="650" cy="320" r="132"/>
+      <path d="M540 380 L715 410 L700 560 L580 620 Z"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(512 512) scale(0.9196) translate(-512 -512)">
+  <g clip-path="url(#plate)">
+    <rect x="64" y="64" width="896" height="896" fill="#f6f2e9"/>
+    <!-- tail: long and narrow, down and back -->
+    <path d="M300 640 L120 930 L215 960 L400 690 Z" fill="#142036"/>
+    <!-- branch -->
+    <rect x="64" y="760" width="896" height="50" fill="#fdd535"/>
+    <!-- silhouette, with the glossy blue throat and breast seen only where the bird is -->
+    <g clip-path="url(#bird)">
+      <rect x="0" y="0" width="1024" height="1024" fill="#142036"/>
+      <circle cx="830" cy="540" r="270" fill="#0b87d1"/>
+      <!-- wing -->
+      <ellipse cx="420" cy="560" rx="190" ry="95" transform="rotate(-30 420 560)" fill="#22345c"/>
+    </g>
+    <!-- bill -->
+    <path d="M770 286 L918 318 L774 350 Z" fill="#142036"/>
+    <!-- eye -->
+    <circle cx="690" cy="292" r="33" fill="#f6f2e9"/>
+    <circle cx="690" cy="292" r="21" fill="#e8402a"/>
+    <!-- feet -->
+    <rect x="500" y="700" width="24" height="70" rx="8" fill="#142036"/>
+    <rect x="570" y="690" width="24" height="80" rx="8" fill="#142036"/>
+  </g>
+  </g>
+</svg>
