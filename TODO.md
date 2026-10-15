@@ -60,13 +60,13 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 ## 4. Left sidebar
 
 - [x] Table list with a name filter
-- [~] Expand a table to see its columns (done). Still missing: sort columns A–Z or by position
+- [x] Expand a table to see its columns, by position or A–Z (right-click the column list, or the sidebar)
 - [~] Sections for tables, views, materialized views, functions and procedures, sequences and user-defined types, collapsible, each switchable on or off (right-click the sidebar); `catalog.rs`. Still missing: recently used items
 - [~] Schema switcher on Postgres (one schema or all, kept per connection); system schemas follow the connection's "Show system schemas" option. Still missing: lazy-loading large schemas
 - [~] Item groups by name rules (starts with, ends with, contains, is), right-click the sidebar for New group, a group's heading to edit or delete it (Ref: `ItemGroupWindow`, `FilterRuleController`). Still missing: adding items by hand
 - [x] Pin items to the top (right-click an item)
-- [ ] Item context menu: open in new tab, open structure, item overview, show diagram, copy name, Copy Script As (CREATE, DROP, …), select top 100, insert into the SQL editor, export, import, clone, truncate, delete
-- [ ] New: table, view, materialized view, function or procedure, schema
+- [x] Item context menu: open in new tab, open structure, item overview, show diagram, copy name, Copy Script As (CREATE, DROP, SELECT, INSERT, UPDATE, DELETE for tables and views; CREATE and DROP for functions, procedures, sequences and materialized views; built in `objects.rs` with quoted names and `?` placeholders), select top 100 (a new SQL tab, run at once), insert into the SQL editor, export, import, clone, truncate, delete. Other items: edit (functions, procedures, Postgres sequences; also a click), copy name, Copy Script As, insert, drop (with cascade on Postgres). Copy Script As is a second menu, since the context menu has no submenus
+- [x] New: table, view, materialized view (Postgres), function, procedure (not SQLite), schema (Postgres), from the sidebar's right-click menu. Views and routines open an editor and are created through the preview
 - [x] Search in database (the sidebar's Search tab): find text across every table, with contains, not contains, prefix and suffix; one table at a time with Stop, values bound as escaped LIKE patterns, counts capped at 1,000 per table; a result opens the table filtered (Ref: `LeftSidebarController`)
 - [x] Item overview (right-click › Overview…): rows (estimated on Postgres and InnoDB, exact on SQLite), size, created date on MySQL (Ref: `ItemOverviewController`, `DefinitionPopover`)
 
@@ -99,11 +99,11 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Filter bar (⌘F, or Filters in the footer): column + operator + value, multiple rows, each with an on/off checkbox, combined with AND (default) or OR; values are bound by the backend (`browse`) (Ref: `FilterViewController`)
 - [x] Operators: =, ≠, <, ≤, >, ≥, contains, not contains, starts with, ends with, IN, NOT IN, BETWEEN, NOT BETWEEN, IS NULL, IS NOT NULL, is empty, is not empty, and raw SQL
 - [x] Filter on "any column"
-- [~] Add and remove filter rows, apply all (done). Still missing: clone a row, apply a single row
-- [ ] Show the SQL a filter produces
+- [x] Add, remove and duplicate filter rows; apply all, or one row alone (▸ switches the others off)
+- [x] Show the SQL a filter produces (SQL in the filter bar): the backend builds it with the same code as `browse`, values written in as quoted literals for display only (`filter_sql`)
 - [x] Quick filter from a cell: right-click → filter rows with this value (IS NULL for NULL cells)
-- [ ] Filter defaults: default column, operator and state (Ref: TableDataController "Advanced Filter settings")
-- [ ] Export the filtered result (Ref: `ExportFilterResultWindow`)
+- [x] Filter defaults (Settings › General): a new row's column (any, first, primary key) and operator, and whether a table opens with the filter bar showing (our reading of TablePlus's "Default Filter State"). Still missing: TablePlus's "Default Filter Column Sort"
+- [x] Export the filtered result (Export… in the filter bar or the footer): every matching row or only the current page
 
 ## 7. Right sidebar
 
@@ -120,9 +120,9 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [~] Check constraints and the primary key: checks listed, primary key set when creating a table (done). Still missing: adding and dropping checks, changing an existing table's primary key
 - [~] Table options: name and comment (done). Still missing: engine and collation (MySQL)
 - [x] View the DDL of a table or view: MySQL `SHOW CREATE TABLE`, SQLite `sqlite_master`, Postgres written from the structure (Ref: `ViewDDLController`)
-- [ ] View structure and definition editing (Ref: `ViewStructureController`)
-- [ ] Function and procedure editor (Ref: `FunctionViewController`)
-- [ ] Sequence editor: current value, increment, cache size, comment (Ref: `SequenceController`)
+- [x] View structure and definition editing: a view's Structure shows its columns and its SELECT in an editor, saved with ⌘S through the preview (CREATE OR REPLACE; materialized views and SQLite views are dropped and created again in one transaction). Postgres materialized views list no columns (the columns query reads `information_schema`, which leaves them out), so they can't be browsed either yet
+- [x] Function and procedure editor: the CREATE statement in an editor window, one per overload on Postgres (CREATE OR REPLACE). MySQL drops and creates the routine; if the new one fails, `run_ddl` puts the original back
+- [x] Sequence editor (Postgres): current value, increment, min, max, start, cache size, cycle and comment; only what changed is altered (`setval` for the value). MariaDB's sequences aren't editable yet
 
 ## 9. Table operations
 
@@ -141,13 +141,13 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] CodeMirror with syntax highlighting and line numbers
 - [x] Run the statement under the cursor, or the selection (⌘↩); Run all runs each statement in turn, stopping at the first error, with one safe-mode confirmation (⌘⇧↩)
 - [x] Highlight the current statement
-- [~] Autocomplete: tables, columns (schema loaded at connect) and keywords. Still missing: functions, uppercase-keywords and Enter/Tab settings
+- [x] Autocomplete: tables, columns (schema loaded at connect), keywords, built-in functions per engine and the database's own (from the sidebar); keywords in upper case and accepting with Enter, Tab or both (Settings › Editor)
 - [x] Format SQL (⌘I or Format in the run bar): the selection or everything, with Standard, Tabular left and Tabular right styles (Settings › Editor), using sql-formatter
 - [x] Toggle line comment (⌘/) and block comment (⌥⇧A), from CodeMirror
 - [x] Find and replace (⌘F in the editor), with regex, match case and whole word, from CodeMirror
-- [ ] Text transforms: upper, lower and capitalize case, shift left and right, trim trailing whitespace, convert indentation
+- [x] Text transforms (Edit menu): upper ⌥⌘U, lower ⌥⌘L and capitalize case ⌥⌘C (the selection, or the word at the cursor), shift right ⌘] and left ⌘[, trim trailing whitespace and convert indentation to tabs or spaces (the selected lines, or all)
 - [x] Show invisible characters, wrap lines (Settings › Editor), font size
-- [ ] Vim key binding (setting: Sublime or Vim)
+- [x] Vim key binding (Settings › Editor: Sublime or Vim), with `@replit/codemirror-vim` 6.3.0 (no dependencies of its own), loaded only when chosen
 - [x] Query parameters: `:name` (default), `$name`, `${name}`, `{{name}}`, `%name%` or `?` (Settings › Editor, or off), found outside strings and comments, asked for once per run with the last values remembered (Ref: `VariableWindow`, `VariableOptionWindow`)
 - [x] Row limit for each run (100 to 100,000 or none; default 1,000): the backend streams rows and keeps only that many, so a huge result can't fill memory
 - [x] Open (⌘O) and save (⌘S, Save as ⌘⇧S) `.sql` files in SQL tabs; files up to 20 MB, saved through a temporary file (dialogs not yet tried in the app window)
@@ -257,7 +257,7 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 
 - [ ] General: language, beta updates, turn off auto-update, reopen workspaces at startup, ⌘T opens a SQL tab or an empty tab, query timeout, keep alive, CSV defaults, report crashes (opt-in) (Ref: `SettingGeneralController`)
 - [ ] Table: estimate count above N rows (default 500,000), PostGIS → WKT, auto-hide scrollbars, open the folder after export (Ref: `SettingTableController`)
-- [ ] SQL Editor: auto-save queries, uppercase keywords, close braces and quotes, complete with Enter or Tab, indent style and width, key binding, query parameter format (Ref: `SettingEditorController`)
+- [~] SQL Editor: uppercase keywords, complete with Enter or Tab, key binding, indent, query parameter format (done). Still missing: auto-save queries, a switch for closing braces and quotes (always on) (Ref: `SettingEditorController`)
 - [x] Security: safe-mode default, passcode, auto-lock time, Touch ID (Ref: `SettingSecurityController`)
 - [x] Locations: folders for connections, queries and history (so it can live in iCloud or Dropbox); restore defaults (Ref: `SettingLocationController`)
 - [ ] Locations: "other data" (MCP settings, settings and themes still in localStorage)
