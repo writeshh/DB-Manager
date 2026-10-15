@@ -41,7 +41,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 ## 3. Workspace window
 
-- [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab (the last one leaves a fresh SQL tab, still connected)
+- [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab; after the last one the workspace stays connected with no tab open, and ⌘W again closes the connection
 - [ ] Rework the sidebar's ‹ Connections button (`#back`, `main.ts` calls `closeWorkspace()`): it disconnects the current workspace and drops the user on the launcher to open a connection again. Make it show the connections without closing anything (e.g. open the launcher as a New workspace tab, like ⌘N, so the current connection stays open in its tab)
 - [x] Open a database (⌘K), and connect without picking a database first
 - [x] Status pill showing the connection and server version
