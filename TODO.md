@@ -76,9 +76,9 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Double-click to edit a cell, with staged changes highlighted
 - [x] Save (⌘S) and Discard, ⌘⌫ sets NULL
 - [x] Virtualized grid so large pages scroll smoothly (only rows near the viewport are drawn; arrow keys move the selection, Shift extends it, Enter edits)
-- [x] Page settings: click the row range in the footer for rows per page, the row to start at, and the count; tables the catalog estimates above a threshold (Settings › Table Data; Postgres `reltuples`, MySQL `table_rows`, SQLite always exact) show "~N" with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
+- [x] Page settings: click the row range in the footer for rows per page, the row to start at, and the count; tables the catalog estimates above a threshold (Settings › Data; Postgres `reltuples`, MySQL `table_rows`, SQLite always exact) show "~N" with a "Count" button for the exact number (Ref: `PagingPopover`, `EstimatedOffsetPopover`)
 - [x] Sort by clicking a column header (ascending, descending, off); Shift-click sorts on several columns
-- [x] Default sort setting (none / primary key ascending / descending), Settings › Table Data
+- [x] Default sort setting (none / primary key ascending / descending), Settings › Data
 - [x] Show and hide columns (Columns in the footer) and resize them (drag a header edge, double-click to fit), remembered per connection and table
 - [x] Reorder columns by dragging headers (view only, remembered per connection and table; Columns › Reset order)
 - [x] Add row, duplicate rows, delete rows (staged like edits; ⌘⌫ deletes the selected rows, again restores them)
@@ -90,9 +90,9 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Quick Look editor: open a large value in a window (also opens for multi-line values, which the one-line editor would flatten) (Ref: `QuickLookWindow`)
 - [x] Follow a foreign key: right-click a value in a key column (marked → in its header) › Open referenced row, which opens the referenced table filtered to that row
 - [x] Rows without a primary key: warn when an edit would hit several rows, and offer "Save Again with Row Identity" (ctid / rowid). Tables without a primary key are editable too, with a warning in the footer and a question before the first save: rows are found by ctid (Postgres) or rowid (SQLite), and on MySQL by all their values with `LIMIT 1` (refused when a FLOAT, JSON, binary or spatial column can't be compared exactly)
-- [ ] Render PostGIS geometry as WKT (setting)
-- [ ] Data-rendering settings: alternating row colors (done as zebra), auto-hide scrollbars
-- [ ] Log the original values when updating or deleting (setting)
+- [x] Render PostGIS geometry as WKT (setting, on by default): extended WKT (`SRID=4326;POINT(1 2)`), which also reads back in when edited
+- [x] Data-rendering settings: alternating row colors (Appearance), thin grid scroll bars shown only while the pointer is over the grid (Settings › Data)
+- [x] Log the original values when updating or deleting (setting): each changed row's values go to the console log as a comment before its statement
 
 ## 6. Filters
 
