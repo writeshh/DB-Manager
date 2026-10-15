@@ -89,7 +89,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [~] Cell editors: date picker, dropdown for enum and boolean columns, JSON editor (text, pretty and minify, validation), binary and bytea hex viewer (binary cells read-only), load a cell's value from a file (20 MB cap) (done). Still missing: JSON tree view (Ref: `DatePickerPopover`, `JSONEditorController`)
 - [x] Quick Look editor: open a large value in a window (also opens for multi-line values, which the one-line editor would flatten) (Ref: `QuickLookWindow`)
 - [x] Follow a foreign key: right-click a value in a key column (marked → in its header) › Open referenced row, which opens the referenced table filtered to that row
-- [~] Rows without a primary key: warn when an edit would hit several rows, and offer "Save Again with Row Identity" (ctid / rowid) (done for keys that match several rows). Still missing: editing tables without a primary key, which stay read-only
+- [x] Rows without a primary key: warn when an edit would hit several rows, and offer "Save Again with Row Identity" (ctid / rowid). Tables without a primary key are editable too, with a warning in the footer and a question before the first save: rows are found by ctid (Postgres) or rowid (SQLite), and on MySQL by all their values with `LIMIT 1` (refused when a FLOAT, JSON, binary or spatial column can't be compared exactly)
 - [ ] Render PostGIS geometry as WKT (setting)
 - [ ] Data-rendering settings: alternating row colors (done as zebra), auto-hide scrollbars
 - [ ] Log the original values when updating or deleting (setting)
