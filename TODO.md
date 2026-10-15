@@ -282,7 +282,7 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 
 - [ ] Postgres-compatible engines first, since they reuse the Postgres driver: CockroachDB, Redshift, Greenplum, Vertica
 - [ ] SQL Server, including Microsoft Entra ID device-code sign-in (Ref: `MSSQLForm`, `MicrosoftEntraIDDeviceCodeWindow`)
-- [ ] Redis: key browser, typed values (string, list, set, hash, zset), each command marked as read or write
+- [x] Redis (`redis.rs`, `redis.ts`): its own RESP2 client over TCP, TLS or SSH, AUTH with an ACL user, database switching (db0…); a key browser (SCAN with a pattern, types, Load more), typed values (string with JSON formatting, hash, list, set, sorted set, stream; at most 1,000 items shown) with edits, expiry, rename (never overwriting) and delete, new keys, and a console that prints replies as redis-cli does. Each command is marked as read or write, and safe mode asks before writes; commands that wait (BLPOP, SUBSCRIBE, MONITOR) are refused. `redis://` and `rediss://` links open the form. Still missing: a tree of key namespaces (`user:…`), large values beyond the first 1,000 items in the view, and Redis Cluster or Sentinel
 - [ ] MongoDB: collections, JSON document grid, Mongo shell and query syntax in the editor, legacy dialect for 3.6/4.0
 - [ ] ClickHouse (native and HTTP), DuckDB, libSQL / Turso, Cloudflare D1
 - [ ] Oracle, Snowflake, BigQuery, Cassandra, DynamoDB, Elasticsearch
