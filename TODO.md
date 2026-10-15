@@ -96,7 +96,6 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Render PostGIS geometry as WKT (setting, on by default): extended WKT (`SRID=4326;POINT(1 2)`), which also reads back in when edited
 - [x] Data-rendering settings: alternating row colors (Appearance), thin grid scroll bars shown only while the pointer is over the grid (Settings › Data)
 - [x] Log the original values when updating or deleting (setting): each changed row's values go to the console log as a comment before its statement
-- [ ] Polish: the table footer's Filters, Columns and Export… buttons (`#table-foot` in `index.html`) look like loose grey text next to the Data / Structure segment, with only a blue text colour showing that Filters is on; restyle them with `/design-taste-frontend` so they read as controls and their on state is clear
 
 ## 6. Filters
 
@@ -159,7 +158,6 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] SQL tabs are saved per connection and reopened on connect (Settings › Editor, on by default)
 - [ ] Fix: keep each database's SQL tabs. Today they're kept per connection (`sql_tabs` keyed by the connection name in `main.ts`) and only from the connection's first workspace tab (`keepsTabs`), so a second database of the same connection (⌘K › Open in a new tab) loses what was written, and every database shares one set. Key them by connection and database, save from every workspace, keep autosaving as you type (the 400 ms `saveSqlTabsSoon`), and flush the pending save when a tab, workspace or connection closes and when the app quits, so reconnecting to that database reopens its own SQL
 - [x] Explain: the plan for the statement under the cursor (EXPLAIN, or EXPLAIN QUERY PLAN on SQLite); safe mode treats EXPLAIN of a query as read-only
-- [ ] Polish: the editor's find and replace panel (CodeMirror's `.cm-search`) looks unstyled: grey bevelled native buttons (next, previous, all, replace, replace all) and checkboxes stacked one per row with their labels pushed right, because the app's global `label { display: grid; grid-template-columns: 96px 1fr }` reaches into the panel. Restyle it with `/design-taste-frontend`: one compact row for find with inline toggles for match case, regexp and by word, one for replace, buttons matching the app's pills, and scope the form `label` rule so it stops leaking into the editor
 
 ## 11. Query results
 
@@ -279,8 +277,6 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [x] Bundled themes (our own: Paper, Harbor, Ember, Lagoon) plus import and export of theme JSON
 - [ ] Install themes from a Git repository and update them (Ref: `ThemeGitController`)
 - [x] Separate light and dark defaults for Auto
-- [ ] Fix: shortcut hints on buttons (`kbd`, e.g. ⌘↩ on Run, ⇧⌘↩ on Run all, ⌘I on Format) are too small and faint to read; make them larger (`kbd` in `styles.css`: 11px at 0.75 opacity)
-- [ ] Fix: input fields look inconsistent across the app; restyle them with `/design-taste-frontend` so text inputs, selects and textareas share one look everywhere. Seen in the filter bar: the column and operator selects keep the native macOS square shape while the value input is a pill (WebKit ignores `border-radius` on selects without `appearance: none` and a custom chevron)
 
 ## 24. More engines
 
