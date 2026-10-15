@@ -115,7 +115,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 ## 8. Table structure
 
 - [x] Structure view: columns, indexes, foreign keys, checks and triggers in sections (`structure.ts`, `structure.rs`)
-- [~] Edit columns: add, drop, rename, change type, nullable, default, comment and auto-increment; staged, previewed as SQL, committed with ⌘S (done). Still missing: reorder (MySQL), length as its own field, and on SQLite changing a type, nullability or default (needs a table rebuild: create, copy, drop, rename) (Ref: `TableStructureController`)
+- [~] Edit columns: add, drop, rename, change type, nullable, default, comment and auto-increment; staged, previewed as SQL, committed with ⌘S (done). Reordering (↑ ↓: a new table in any engine, an existing one on MySQL, all moves in one ALTER, keeping each column's collation and ON UPDATE; generated columns refused) and Length as its own field (it edits the type's (…)). Still missing: on SQLite changing a type, nullability or default (needs a table rebuild: create, copy, drop, rename) (Ref: `TableStructureController`)
 - [x] Indexes: list, add and drop with name, columns, unique flag and method (Postgres btree, hash, gist, gin, brin, spgist; MySQL BTREE, HASH) (Ref: `TableIndexController`)
 - [x] Foreign keys: column, referenced table and columns, ON UPDATE and ON DELETE; on SQLite only when creating the table (Ref: `ForeignKeyPopover`)
 - [x] Triggers: listed, added (name, BEFORE/AFTER, the event — several on Postgres — and what it runs: the function on Postgres, statements on MySQL and SQLite), edited (drop, then add again) and dropped. Statement-level triggers, WHEN clauses and column lists stay as written and can only be dropped (Ref: `TriggerPopover`)
