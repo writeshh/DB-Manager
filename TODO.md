@@ -118,7 +118,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [~] Edit columns: add, drop, rename, change type, nullable, default, comment and auto-increment; staged, previewed as SQL, committed with ⌘S (done). Still missing: reorder (MySQL), length as its own field, and on SQLite changing a type, nullability or default (needs a table rebuild: create, copy, drop, rename) (Ref: `TableStructureController`)
 - [x] Indexes: list, add and drop with name, columns, unique flag and method (Postgres btree, hash, gist, gin, brin, spgist; MySQL BTREE, HASH) (Ref: `TableIndexController`)
 - [x] Foreign keys: column, referenced table and columns, ON UPDATE and ON DELETE; on SQLite only when creating the table (Ref: `ForeignKeyPopover`)
-- [~] Triggers: listed (done). Still missing: add, edit and drop (Ref: `TriggerPopover`)
+- [x] Triggers: listed, added (name, BEFORE/AFTER, the event — several on Postgres — and what it runs: the function on Postgres, statements on MySQL and SQLite), edited (drop, then add again) and dropped. Statement-level triggers, WHEN clauses and column lists stay as written and can only be dropped (Ref: `TriggerPopover`)
 - [x] Check constraints and the primary key: checks listed, added (named, any SQL expression) and dropped; the primary key set when creating a table and changed on an existing one with the Key column (MySQL in one statement; Postgres drops the old constraint by name). SQLite only at creation (a rebuild otherwise)
 - [x] Table options: name and comment; MySQL's engine (from the server's) and default collation
 - [x] View the DDL of a table or view: MySQL `SHOW CREATE TABLE`, SQLite `sqlite_master`, Postgres written from the structure (Ref: `ViewDDLController`)
