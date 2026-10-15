@@ -41,8 +41,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 ## 3. Workspace window
 
-- [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab (and closes the workspace on the last one)
-- [ ] Fix: closing the last item tab closes the workspace and disconnects (`main.ts`, the `closeWorkspace()` call when no tabs are left, there on purpose to match TablePlus). Keep the connection open instead and show an empty workspace (e.g. a fresh SQL tab or an empty state); leaving the connection stays with the workspace tab's × and Disconnect
+- [x] Tabs: table tabs and SQL tabs, ⌘T new SQL tab, ⌘W closes a tab (the last one leaves a fresh SQL tab, still connected)
 - [ ] Rework the sidebar's ‹ Connections button (`#back`, `main.ts` calls `closeWorkspace()`): it disconnects the current workspace and drops the user on the launcher to open a connection again. Make it show the connections without closing anything (e.g. open the launcher as a New workspace tab, like ⌘N, so the current connection stays open in its tab)
 - [x] Open a database (⌘K), and connect without picking a database first
 - [x] Status pill showing the connection and server version
@@ -109,7 +108,6 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Quick filter from a cell: right-click → filter rows with this value (IS NULL for NULL cells)
 - [x] Filter defaults (Settings › General): a new row's column (any, first, primary key) and operator, and whether a table opens with the filter bar showing (our reading of TablePlus's "Default Filter State"). Still missing: TablePlus's "Default Filter Column Sort"
 - [x] Export the filtered result (Export… in the filter bar or the footer): every matching row or only the current page
-- [ ] Fix: the filter bar's Value field can't be typed into in the app (seen on a MySQL table with column `id`, operator contains); it takes focus and shows the caret, but no text goes in. Check whether it's a regression from the brand restyle
 - [ ] Fix: the filter row's icon buttons (▸ apply only this, ⧉ duplicate, − remove, + add) are tiny and faint; make the glyphs larger and darker with bigger hit targets. They're `ghost` buttons built as text glyphs in `filters.ts`, so they get the muted colour and small padding
 
 ## 7. Right sidebar
