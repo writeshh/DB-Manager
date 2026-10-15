@@ -110,7 +110,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 ## 7. Right sidebar
 
 - [x] Row detail (Space): every field of the selected row as an editable form, with search, an enum dropdown and automatic JSON formatting (Ref: `RightSidebarController`)
-- [ ] AI assistant tab (see section 19)
+- [x] Assistant pane on the right of the workspace (⌥⌘4, or the toolbar's sparkle button), resizable; see section 19
 
 ## 8. Table structure
 
@@ -228,10 +228,10 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 ## 19. AI
 
-- [ ] Assistant tab in the right sidebar: chat that writes SQL with the schema as context, chat history, insert into the editor (Ref: `AIChatViewController`, `AIChatContextViewController`)
-- [ ] Providers: OpenAI-compatible (custom base URL), Claude Code / Codex / other agents over ACP, GitHub Copilot; API keys in the keychain (Ref: `OpenAICompatibleConfigView`, `GitHubCopilotConfigView`)
-- [ ] Approve each query the AI wants to run (Ref: `AIQueryApprovalPopover`)
-- [ ] Consent notice that prompts go to the provider
+- [x] Assistant pane: chat that writes SQL with the schema (tables, columns, types, foreign keys) as context, SQL blocks with Insert and Copy, chat history per connection in `ai-chats.json` next to the query history (Ref: `AIChatViewController`, `AIChatContextViewController`)
+- [~] Providers: Anthropic and OpenAI-compatible (custom base URL: OpenAI, Ollama, LM Studio…), API keys in the keychain, HTTPS only except to this computer (done, `ai.rs`). Still missing: Claude Code / Codex / other agents over ACP, GitHub Copilot, and an HTTPS proxy setting (Ref: `OpenAICompatibleConfigView`, `GitHubCopilotConfigView`)
+- [x] Approve each query the AI wants to run: Run or Don't run in the chat; it runs only when the parse calls it read-only, inside read-only bounds, at most 50 rows, and safe mode password levels still ask (Ref: `AIQueryApprovalPopover`)
+- [x] Consent notice that prompts go to the provider: the assistant is off until turned on under the notice (Settings › AI)
 
 ## 20. MCP server
 
@@ -265,7 +265,7 @@ What already exists: theme (auto / light / dark), alternating rows, font size, l
 - [x] Locations: settings, themes, column layouts and the other remembered choices live in `settings.json` in their own Settings folder (prefs.ts), so they can sync between Macs. localStorage only keeps a copy for a fast start; the file wins, and settings found in a newly chosen folder apply at the next start. MCP settings stay in the config folder on purpose: their access tokens belong to one machine
 - [x] Shortcuts: rebind every command (click its shortcut, press the new keys), with conflict detection, clear, reset one or all; kept with the other settings (Ref: `SettingShortcutKeyController`). Commands live in `commands.ts`, which feeds the keyboard, the menu bar and Open Anything
 - [ ] Fonts and themes: see section 23
-- [ ] AI: see section 19
+- [x] AI: see section 19
 - [x] MCP: see section 20
 
 ## 23. Themes and appearance
