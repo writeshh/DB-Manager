@@ -164,7 +164,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Message tab: affected rows and errors per statement, and its time. Timed in the UI around each statement, so it includes network latency and the app's own round trip
 - [x] Stop on error option (Settings › Editor › Run all)
 - [x] Pin a result tab so it stays
-- [~] Search and replace within a result (Ref: `QueryResultController`). Search filters the shown result's rows; no replace
+- [x] Search and replace within a result (Ref: `QueryResultController`). Search filters the shown result's rows; Replace… (beside it, on a result that can be edited in place) replaces plain text in every cell, with match case and whole cell options, staged as one undo step to review and Save
 - [x] Load more rows: a read-only statement whose result was cut runs again with room for another row limit's worth
 - [x] Edit results from a single-table query in place, the same as the data grid. Only a plain `SELECT … FROM one_table [WHERE/ORDER/LIMIT]` whose columns are all the table's own, key included; not in the one-tab mode or while searching. Saving runs the statement again
 - [x] Charts from results: line, bar and pie, with x and y axis pickers (several y series for line and bar), in place of the grid (the strip's Chart button); add a chart to the Metrics Board. Plain SVG, no chart library; a tooltip on hover and arrow keys
