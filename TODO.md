@@ -304,7 +304,7 @@ Rules live in [CLAUDE.md](CLAUDE.md). Done so far: strict lints, typed errors, b
 - [x] `cargo-audit` and `cargo-deny` with `deny.toml` (license allowlist, advisories, no unknown sources): `npm run audit`. Kept out of `npm run check` because it fetches the advisory database. One ignored advisory, RUSTSEC-2023-0071 (rsa via russh, no fix released; reason in `deny.toml`)
 - [~] One lock per connection instead of one global lock (done: a slow query holds up only its own connection, and keep-alive skips busy ones). Still missing: SQLite calls in `spawn_blocking` (they block one async worker thread meanwhile)
 - [~] Safe mode: SELECTs that call built-in side-effect functions (`nextval`, `pg_terminate_backend`, `lo_unlink`, `dblink`, `load_extension`…) and `SELECT … INTO` count as writes (done). Still missing: user-defined functions that write (MCP read-only tokens are covered by a read-only transaction; the editor isn't)
-- [ ] Property tests (`proptest`) for the read-only check and identifier quoting; fuzz the read-only check with `cargo fuzz`
+- [x] Property tests (`proptest`) for the read-only check (never panics; a write after any read is caught; SELECTs of any quoted names pass) and for quoting (identifiers and literals read back as given); a `cargo fuzz` target for the read-only check (`src-tauri/fuzz`)
 - [x] Size limits on imports (CSV and SQL records 64 MB, 4,096 fields, JSON files 100 MB) and on cell values loaded from files (20 MB)
 
 ## Not copying
