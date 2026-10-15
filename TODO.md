@@ -71,7 +71,6 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] New: table, view, materialized view (Postgres), function, procedure (not SQLite), schema (Postgres), from the sidebar's right-click menu. Views and routines open an editor and are created through the preview
 - [x] Search in database (the sidebar's Search tab): find text across every table, with contains, not contains, prefix and suffix; one table at a time with Stop, values bound as escaped LIKE patterns, counts capped at 1,000 per table; a result opens the table filtered (Ref: `LeftSidebarController`)
 - [x] Item overview (right-click › Overview…): rows (estimated on Postgres and InnoDB, exact on SQLite), size, created date on MySQL (Ref: `ItemOverviewController`, `DefinitionPopover`)
-- [ ] Fix: the sidebar's Items / History / Queries / Search segment is crammed, four labels squeezed into the 248px sidebar. Drop the Queries tab: saved queries are favorites kept from history, so show them as a collapsible Saved queries section at the top of the History pane (folders inside it as now). That leaves three tabs with room to breathe
 
 ## 5. Data grid
 
@@ -176,7 +175,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 - [x] History for each connection, grouped and searchable, click to reopen
 - [x] Keep history 1, 2 or 3 years, or forever (Settings › General; at most 5,000 per connection); clear history; history stored in a file, not localStorage
-- [x] Saved queries (favorites): folders, rename, open in a tab, add from history (right-click) or the editor (Save Query as Favorite…), per connection in `favorites.json` beside the SQL tabs, so Settings › Locations puts them in a shared folder (Ref: `LeftSidebarController` "Queries"). Not done: drag and drop between folders (the edit dialog moves them), nested folders, a folder of `.sql` files
+- [x] Saved queries (favorites): folders, rename, open in a tab, add from history (right-click) or the editor (Save Query as Favorite…), per connection in `favorites.json` beside the SQL tabs, so Settings › Locations puts them in a shared folder (Ref: `LeftSidebarController` "Queries"). Shown as a Saved queries section at the top of the History pane; the pane's search box filters both. Not done: drag and drop between folders (the edit dialog moves them), nested folders, a folder of `.sql` files
 - [x] A favorite can be an autocomplete snippet with keywords (Ref: `FavoriteEditorWindow`)
 - [x] Console log: every statement the app sends, with syntax highlighting, and a clear button (Ref: `CommandLoggerController`). Recorded in db.rs where statements go out (the last 1,000; bound values show as placeholders), all connections in one log; the panel (⇧⌘C) reads it while open
 
