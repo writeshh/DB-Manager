@@ -52,12 +52,12 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] New workspace (⌘N, or + in the tab strip): the launcher shows as a "New workspace" tab beside the open ones, like a browser's new tab; connecting fills it, × goes back. A separate window isn't needed with the tabs
 - [x] Open Anything (⌘P): fuzzy search across tables, views, materialized views, functions, sequences, types, SQL tabs, other workspaces and commands, with arrow keys and Enter (Ref: `OpenAnythingController`). Saved queries join when section 12 has them
 - [ ] Toolbar: connection, database, SQL file, reload, safe-mode level, console log, row detail, metrics, user management (Ref: `WorkspaceWindow`)
-- [ ] Toggle the left sidebar, right sidebar, bottom console and results pane
+- [x] Toggle the left sidebar (⌥⌘1), the row detail sidebar (⌥⌘2), the console (⇧⌘C) and the results pane (⌥⌘3, a SQL tab's editor takes the pane), in View; the sidebar and results choices are kept
 - [x] Reload current tab (⌘R), reload workspace (⌘⌥R)
 - [x] Go back and forward through opened items (⌃⌘← / ⌃⌘→)
 - [x] Database window (⌘K): create (encoding/character set and collation), rename and drop databases on Postgres and MySQL/MariaDB, each through the SQL preview and safe mode; open in the current tab or a new one (Ref: `DatabaseWindow`, `NewDatabaseWindow`). MySQL has no RENAME DATABASE: its tables move to a new database and the old one is dropped, refused when it has views, routines, triggers or events. Postgres can't rename or drop the database a session is on (the server says so)
 - [ ] Notifications panel for finished background jobs (exports, imports, backups)
-- [ ] Resizable panes: drag the sidebar's right edge (now a fixed 248px, `#workspace` grid in `styles.css`), the split between the SQL editor and its results (`.sql-pane`, a fixed 38% height), and the console panel's top edge (`.console`, a fixed 30% height in `results.css`) to resize them. Clamp to sensible minimums, double-click a divider to reset, keep the sizes per window across launches, and give each divider a keyboard path (focusable, arrow keys)
+- [x] Resizable panes: drag the sidebar's right edge, the SQL editor's bottom edge and the console's top edge (`splitters.ts`). Clamped (sidebar 180–560px and at most half the window, editor and console leave the results room), double-click or Home resets, focus a divider and use the arrow keys (16px, Shift 64px); sizes kept in settings across launches. Not yet: the row detail sidebar's width
 
 ## 4. Left sidebar
 
