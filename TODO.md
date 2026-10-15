@@ -255,12 +255,12 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 What already exists: theme (auto / light / dark), alternating rows, font size, line height, indent, safe-mode default. Still to add, by TablePlus tab:
 
-- [ ] General: language, beta updates, turn off auto-update, reopen workspaces at startup, ⌘T opens a SQL tab or an empty tab, query timeout, keep alive, CSV defaults, report crashes (opt-in) (Ref: `SettingGeneralController`)
-- [ ] Table: estimate count above N rows (default 500,000), PostGIS → WKT, auto-hide scrollbars, open the folder after export (Ref: `SettingTableController`)
-- [~] SQL Editor: uppercase keywords, complete with Enter or Tab, key binding, indent, query parameter format (done). Still missing: auto-save queries, a switch for closing braces and quotes (always on) (Ref: `SettingEditorController`)
+- [~] General: reopen workspaces at startup, query timeout, keep alive, query history retention (done); CSV options are remembered from the last export. Still missing: language (English only for now), beta updates and turning off auto-update (wait for the updater, section 25), ⌘T opening an empty tab instead of a SQL tab. Not copying: crash reports (Sentry) (Ref: `SettingGeneralController`)
+- [x] Table (Settings › Data): page size, estimate count above N rows, default sort, PostGIS → WKT, auto-hide scrollbars, log original values, show an export's files in Finder when it finishes (Ref: `SettingTableController`)
+- [x] SQL Editor: uppercase keywords, complete with Enter or Tab, key binding, indent, query parameter format, close brackets and quotes; SQL tabs are kept as you type ("Keep SQL tabs"), which covers auto-save (Ref: `SettingEditorController`)
 - [x] Security: safe-mode default, passcode, auto-lock time, Touch ID (Ref: `SettingSecurityController`)
 - [x] Locations: folders for connections, queries and history (so it can live in iCloud or Dropbox); restore defaults (Ref: `SettingLocationController`)
-- [ ] Locations: "other data" (MCP settings, settings and themes still in localStorage)
+- [x] Locations: settings, themes, column layouts and the other remembered choices live in `settings.json` in their own Settings folder (prefs.ts), so they can sync between Macs. localStorage only keeps a copy for a fast start; the file wins, and settings found in a newly chosen folder apply at the next start. MCP settings stay in the config folder on purpose: their access tokens belong to one machine
 - [x] Shortcuts: rebind every command (click its shortcut, press the new keys), with conflict detection, clear, reset one or all; kept with the other settings (Ref: `SettingShortcutKeyController`). Commands live in `commands.ts`, which feeds the keyboard, the menu bar and Open Anything
 - [ ] Fonts and themes: see section 23
 - [ ] AI: see section 19
@@ -291,7 +291,7 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 - [ ] App updater (Tauri updater) with a changelog
 - [~] Release builds: `npm run bundle` runs the checks and audit, then makes the `.app` and `.dmg` on macOS (done). Still missing: Developer ID signing and notarization (builds are ad-hoc signed, so other Macs block them), and trying the AppImage/`.deb` build on Linux
 - [ ] Linux fallback when there's no Secret Service: an encrypted file protected by a master password
-- [ ] Move history, saved queries and settings out of localStorage into files in the data folders (needed for section 22 Locations)
+- [x] Move history, saved queries and settings out of localStorage into files in the data folders
 
 ## 26. Rust hygiene
 
