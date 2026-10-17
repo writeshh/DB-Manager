@@ -26,7 +26,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 ## 2. Connection transport
 
-- [x] **SSH tunnel**: server, port, user, password or private key (with key password), "use ~/.ssh/config when the key is empty" (Ref: `ConnectionPartSSHController`). Backend tested end to end with `scripts/test-ssh.sh`; the form is not yet tried in the app window. Not yet: ProxyJump/ProxyCommand, host certificates, a file picker for the key
+- [x] **SSH tunnel**: server, port, user, password or private key (with key password), "use ~/.ssh/config when the key is empty" (Ref: `ConnectionPartSSHController`). Backend tested end to end with `scripts/test-ssh.sh`; the form's fields are checked in the browser preview (not yet tried against a real server in the app window). Not yet: ProxyJump/ProxyCommand, host certificates, a file picker for the key
 - [x] SSL: Disable / Prefer / Require / Verify CA / Verify full for every engine, with libpq semantics (Prefer and Require encrypt without checking the certificate), CA, client cert and key files with file pickers; TLS is checked against the real host name through SSH tunnels (Ref: `PostgreSQLForm`, `MySQLForm`)
 - [x] Postgres options: direct TLS negotiation, show system schemas, disable channel binding (More options in the form)
 - [x] MySQL options: socket instead of host (not yet tried against a real socket), SNI name, cleartext auth plugin
@@ -152,7 +152,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Vim key binding (Settings › Editor: Sublime or Vim), with `@replit/codemirror-vim` 6.3.0 (no dependencies of its own), loaded only when chosen
 - [x] Query parameters: `:name` (default), `$name`, `${name}`, `{{name}}`, `%name%` or `?` (Settings › Editor, or off), found outside strings and comments, asked for once per run with the last values remembered (Ref: `VariableWindow`, `VariableOptionWindow`)
 - [x] Row limit for each run (100 to 100,000 or none; default 1,000): the backend streams rows and keeps only that many, so a huge result can't fill memory
-- [x] Open (⌘O) and save (⌘S, Save as ⌘⇧S) `.sql` files in SQL tabs; files up to 20 MB, saved through a temporary file (dialogs not yet tried in the app window)
+- [x] Open (⌘O) and save (⌘S, Save as ⌘⇧S) `.sql` files in SQL tabs; files up to 20 MB, saved through a temporary file (tried in the app window: ⌘O, ⌘S, Save As and Cancel, and no temp file is left behind)
 - [ ] New SQL Viewer window (Ref: `SQLViewerWindow`)
 - [x] SQL tabs are saved per connection and database, from every workspace tab, and reopened on connect (Settings › Editor, on by default). Saved 400 ms after typing stops, and at once before switching database or workspace, closing a workspace, and closing the window or quitting (Quit closes the window so this runs). Tabs kept per connection by earlier builds go to the first database opened
 - [x] Explain: the plan for the statement under the cursor (EXPLAIN, or EXPLAIN QUERY PLAN on SQLite); safe mode treats EXPLAIN of a query as read-only
@@ -213,7 +213,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 
 - [x] Dashboard canvas made of widgets: data table, scoreboard, bar, line and pie charts, exporter, importer, input field, button, dropdown, connection (Ref: `MetricsBoardWindow`, `Metrics*View`). Opens over the workspace (Tools › Metrics Board); the connection widget picks which open connection the board runs on
 - [x] Widgets bound to queries, with input fields and dropdowns feeding named query parameters (the editor's parameter format). A query that may change data runs only from its widget's own Run button, after asking; auto-refresh and parameter changes skip it, and skip what safe mode wants approved
-- [~] Auto-refresh (per board or per widget), lock board, grid (drag to move and resize), several boards per connection, import and export a board (JSON with a version). No TablePlus-style event wiring between widgets: a parameter change refreshes the widgets using it, a button refreshes the board. Moving and resizing is pointer-only
+- [~] Auto-refresh (per board or per widget), lock board, grid (drag to move and resize), several boards per connection, import and export a board (JSON with a version). No TablePlus-style event wiring between widgets: a parameter change refreshes the widgets using it, a button refreshes the board. Moving and resizing also work from the keyboard (focus a widget's header: arrows move, Shift + arrows resize)
 
 ## 18. Safety and security
 
@@ -289,13 +289,13 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite. Turn `db.rs`'s `Conn` enum into a driv
 
 ## 25. App and platform
 
-- [x] Menu bar matching TablePlus: File, Edit, View, Navigate, Connection, Tools, Window, Help (`menu.ts`, Tauri's menu API, built from the command list and rebuilt when a shortcut changes). Not yet tried in the app window
+- [x] Menu bar matching TablePlus: File, Edit, View, Navigate, Connection, Tools, Window, Help (`menu.ts`, Tauri's menu API, built from the command list and rebuilt when a shortcut changes; items whose command doesn't apply, such as Save on the launcher, are greyed out). Tried in the app window: all eight menus, their shortcuts and enabled states
 - [ ] App updater (Tauri updater) with a changelog
 - [~] Release builds: `npm run bundle` runs the checks and audit, then makes the `.app` and `.dmg` on macOS (done). Still missing: Developer ID signing and notarization (builds are ad-hoc signed, so other Macs block them), and trying the AppImage/`.deb` build on Linux
 - [x] Linux fallback when there's no Secret Service: an encrypted file protected by a master password (`secrets.rs`: `secrets.vault` in the config folder, argon2id and AES-256-GCM as for exported connections; unlocked at startup when it exists, made on the first saved password, "Forgot master password?" starts over and keeps the old file renamed)
 - [x] Move history, saved queries and settings out of localStorage into files in the data folders
 - [ ] New logo: a blue mockingbird (*Melanotis caerulescens*). Reference: perched, deep blue-black with scaled, glossy blue throat and breast feathers, a red eye, a slim dark bill and a long tail. Simplify it into a mark that keeps the brand's flat ink-and-primaries style and reads at 16px. Replaces the launcher's four-disc mark (`.mark` in `styles.css`) and the app icons in `src-tauri/icons/` (regenerate them with `npm run tauri icon` from one source image)
-- [~] Custom title bar: the macOS title bar is see-through (`titleBarStyle: "Overlay"`, `hiddenTitle`, a traffic-light inset in `tauri.conf.json`); the workspace tab strip sits beside the traffic lights, and its empty parts (or, on the launcher, a strip of the same height) drag the window and double-click to zoom (`data-tauri-drag-region`); in full screen the strip starts at the left edge. Windows and Linux keep their native frame. Not yet tried in the app window. Still open: moving header items such as the connection pill or Console / SQL into the bar
+- [~] Custom title bar: the macOS title bar is see-through (`titleBarStyle: "Overlay"`, `hiddenTitle`, a traffic-light inset in `tauri.conf.json`); the workspace tab strip sits beside the traffic lights, and its empty parts (or, on the launcher, a strip of the same height) drag the window and double-click to zoom (`data-tauri-drag-region`); in full screen the strip starts at the left edge. Windows and Linux keep their native frame. Tried in the app window: drag and double-click-to-zoom on the launcher strip, the tab strip beside the traffic lights, and full screen (the strip starts at the left edge). Not tried: dragging the workspace tab strip. Still open: moving header items such as the connection pill or Console / SQL into the bar
 
 ## 26. Rust hygiene
 
