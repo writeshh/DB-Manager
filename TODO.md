@@ -19,7 +19,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Duplicate a connection (with its keychain secrets), Copy as URL (never the password)
 - [x] Import a connection from a URL, e.g. `postgresql://user@localhost/db`, or a SQLite path; opens the form filled in (Ref: `ImportConnectionURLWindow`)
 - [x] Import and export connections as a file: all, one group or one connection, password-protected (AES-256-GCM, argon2id key), with an option to include passwords, which only go into a protected file (Ref: `ExportConnectionWindow`). Name clashes on import get a free name
-- [~] Open Recent list: File › Open Recent and a Recent section on the launcher (done). Still missing: open a connection in a new window (Ref: `ConnectionWindow`)
+- [x] Open Recent list: File › Open Recent and a Recent section on the launcher. Each connect opens a new workspace tab, which is what TablePlus's "open in a new window" is for (Ref: `ConnectionWindow`)
 - [x] Reopen the workspaces open at quit, at startup (Settings › General, off by default)
 - [~] Open by URL scheme: `postgresql://`, `postgres://`, `mysql://`, `mariadb://` links (`Info.plist`) open the new-connection form filled in. Not tried in a bundled app yet; macOS only (other platforms need the deep-link plugin)
 - [~] Open `.sqlite`/`.db` files from Finder (file associations, rank Alternate): the form opens filled in. Not tried in a bundled app yet. Still missing: TablePlus connection files
@@ -58,7 +58,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 - [x] Go back and forward through opened items (⌃⌘← / ⌃⌘→)
 - [x] Database window (⌘K): create (encoding/character set and collation), rename and drop databases on Postgres and MySQL/MariaDB, each through the SQL preview and safe mode; open in the current tab or a new one (Ref: `DatabaseWindow`, `NewDatabaseWindow`). MySQL has no RENAME DATABASE: its tables move to a new database and the old one is dropped, refused when it has views, routines, triggers or events. Postgres can't rename or drop the database a session is on (the server says so)
 - [x] Notifications for finished background jobs (exports, imports, backups, restores): every job's card stacks in one panel at the bottom right and stays until dismissed; the header's Jobs button (with a count of unseen ones) or View › Notifications lists this session's finished jobs, with Show in Finder. Not kept across launches
-- [x] Resizable panes: drag the sidebar's right edge, the SQL editor's bottom edge and the console's top edge (`splitters.ts`). Clamped (sidebar 180–560px and at most half the window, editor and console leave the results room), double-click or Home resets, focus a divider and use the arrow keys (16px, Shift 64px); sizes kept in settings across launches. Not yet: the row detail sidebar's width
+- [x] Resizable panes: drag the sidebar's right edge, the SQL editor's bottom edge and the console's top edge (`splitters.ts`). Clamped (sidebar 180–560px and at most half the window, editor and console leave the results room), double-click or Home resets, focus a divider and use the arrow keys (16px, Shift 64px); sizes kept in settings across launches. The row detail sidebar's left edge resizes the same way (220–640px, at most 60% of the grid area)
 
 ## 4. Left sidebar
 
