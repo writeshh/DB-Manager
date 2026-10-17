@@ -26,7 +26,7 @@ The goal: everything TablePlus 27.0.2 does, feature for feature. Built from the 
 
 ## 2. Connection transport
 
-- [x] **SSH tunnel**: server, port, user, password or private key (with key password), "use ~/.ssh/config when the key is empty" (Ref: `ConnectionPartSSHController`). Backend tested end to end with `scripts/test-ssh.sh`; the form's fields are checked in the browser preview (not yet tried against a real server in the app window). Not yet: ProxyJump/ProxyCommand, host certificates, a file picker for the key
+- [x] **SSH tunnel**: server, port, user, password or private key (with key password), "use ~/.ssh/config when the key is empty" (Ref: `ConnectionPartSSHController`). Backend tested end to end with `scripts/test-ssh.sh` (MySQL). `scripts/test-env.sh up` starts Docker servers (an sshd with Postgres and MySQL reachable only through it) and the form was tried against them in the app window: Postgres with a password, Postgres and MySQL with a key, and a bad key path gives a clear error (this found and fixed Postgres failing over SSH with "invalid number of ports"). Not yet: ProxyJump/ProxyCommand, host certificates, a file picker for the key
 - [x] SSL: Disable / Prefer / Require / Verify CA / Verify full for every engine, with libpq semantics (Prefer and Require encrypt without checking the certificate), CA, client cert and key files with file pickers; TLS is checked against the real host name through SSH tunnels (Ref: `PostgreSQLForm`, `MySQLForm`)
 - [x] Postgres options: direct TLS negotiation, show system schemas, disable channel binding (More options in the form)
 - [x] MySQL options: socket instead of host (not yet tried against a real socket), SNI name, cleartext auth plugin
