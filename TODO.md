@@ -154,7 +154,7 @@ Right-click a table in the sidebar (or the sidebar's empty space). Each shows it
 - [x] Query parameters: `:name` (default), `$name`, `${name}`, `{{name}}`, `%name%` or `?` (Settings › Editor, or off), found outside strings and comments, asked for once per run with the last values remembered (Ref: `VariableWindow`, `VariableOptionWindow`)
 - [x] Row limit for each run (100 to 100,000 or none; default 1,000): the backend streams rows and keeps only that many, so a huge result can't fill memory
 - [x] Open (⌘O) and save (⌘S, Save as ⌘⇧S) `.sql` files in SQL tabs; files up to 20 MB, saved through a temporary file (tried in the app window: ⌘O, ⌘S, Save As and Cancel, and no temp file is left behind)
-- [ ] New SQL Viewer window (Ref: `SQLViewerWindow`)
+- [x] SQL Viewer (File › New SQL Viewer, `viewer.ts`): a dialog with one editor for reading and editing a `.sql` file without a connection: Open, Save, Save As (temporary file then rename, 20 MB cap), highlighting dialect, asks before unsaved text is dropped. `.sql` files opened from Finder go there (file association, rank Alternate; not tried in a bundled app) (Ref: `SQLViewerWindow`). No completion or formatting; it can't run anything
 - [x] SQL tabs are saved per connection and database, from every workspace tab, and reopened on connect (Settings › Editor, on by default). Saved 400 ms after typing stops, and at once before switching database or workspace, closing a workspace, and closing the window or quitting (Quit closes the window so this runs). Tabs kept per connection by earlier builds go to the first database opened
 - [x] Explain: the plan for the statement under the cursor (EXPLAIN, or EXPLAIN QUERY PLAN on SQLite); safe mode treats EXPLAIN of a query as read-only
 
