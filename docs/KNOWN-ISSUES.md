@@ -8,9 +8,11 @@ Bugs, limitations and open questions, as of 2026-10-19. **Verified** means repro
 
 **ISSUE-002 — `src/main.ts` is 3,853 lines.** Verified. Every UI change touches it, so parallel branches conflict there (the reason the first split was held back, per the 2026-10-14 workspace-window notes). See TASK-001.
 
-**ISSUE-003 — Saving a connection doesn't close its open non-SQL sessions.** Verified by reading code; not reproduced. `save_connection` calls `Open::remove_all`, which drops only SQL sessions. Redis, MongoDB, DynamoDB, Elasticsearch and Cassandra sessions keep the old settings, including the safety level, until they reconnect. `disconnect` does remove all five. Expected: the same as SQL. First noted in the 2026-10-17 review for Redis. TASK-007.
+**ISSUE-003 — Saving a connection doesn't close its open non-SQL sessions.** Fixed 2026-10-19 on `feature/charming-mestorf-7f41f0`, in the commit that adds `Sessions::remove_all`: `save_connection` now drops every session of the connection, under its new and previous name and its database tabs included, from `Open` and all five non-SQL maps. Was: only `Open::remove_all` ran, so Redis, MongoDB, DynamoDB, Elasticsearch and Cassandra sessions kept the old settings, including the safety level, until they reconnected. TASK-007.
 
-**ISSUE-004 — Two connects racing for one non-SQL session both open, and the second overwrites the first.** Verified by reading code. `sessions::Sessions::insert` replaces; the SQL side uses `Open::insert_new`, which keeps the first (fixed for SQL in `2efec09`). Impact: one extra connection, closed when dropped. TASK-008.
+**ISSUE-004 — Two connects racing for one non-SQL session both open, and the second overwrites the first.** Fixed 2026-10-19 in the same commit as ISSUE-003: `Sessions::insert_new` keeps the first session, as `Open::insert_new` does for SQL (`2efec09`), and the five `*_connect` commands use it. Redis still replaces the session when switching database, on purpose. TASK-008.
+
+**ISSUE-005 — Deleting a connection doesn't close its open non-SQL sessions.** Verified by reading code 2026-10-19; not reproduced. `delete_connection` calls only `Open::remove_all`, so a Redis, MongoDB, DynamoDB, Elasticsearch or Cassandra session of a deleted connection stays usable until disconnect. Fix: the same five `remove_all` calls `save_connection` makes. TASK-017.
 
 **ISSUE-010 — Read-only rests on the SQL parse alone for SQL Server, libSQL and D1.** Reported (TODO §24). Their servers can't hold a session read-only, so safe mode's second line (a read-only transaction) is missing, and MCP read-only tokens rely on sqlparser. Also, Postgres lets a function write to temporary tables inside a read-only transaction (TODO §26).
 

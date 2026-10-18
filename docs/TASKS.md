@@ -19,9 +19,8 @@ Known, actionable work, as of 2026-10-19. Feature gaps live in [../TODO.md](../T
 
 | ID | Task | Why it matters | Files |
 | --- | --- | --- | --- |
-| TASK-007 | Saving a connection should also drop its open non-SQL sessions (ISSUE-003) | A safety level raised in the form doesn't reach an open Redis, MongoDB, DynamoDB, Elasticsearch or Cassandra session until it reconnects | `src-tauri/src/lib.rs` (`save_connection`; `disconnect` already removes all five) |
-| TASK-008 | Make non-SQL connects keep the first session when two race (ISSUE-004) | The SQL side has `Open::insert_new`; `Sessions::insert` overwrites | `src-tauri/src/sessions.rs` and the five `*_connect` commands |
 | TASK-009 | Update `src-tauri/Cargo.toml`'s `description` (ISSUE-001) | It still says "Postgres, MySQL/MariaDB and SQLite" | `src-tauri/Cargo.toml` |
+| TASK-017 | Deleting a connection should also drop its open non-SQL sessions (ISSUE-005) | A deleted Redis, MongoDB, DynamoDB, Elasticsearch or Cassandra connection's session stays usable until disconnect | `src-tauri/src/lib.rs` (`delete_connection`; `save_connection` shows the five `remove_all` calls) |
 
 ## From TODO.md (not prioritized by the owner)
 
@@ -39,3 +38,4 @@ Pointers only; TODO.md has the detail.
 
 - Oracle on the `oracle` crate with Instant Client: committed as `12be348` on 2026-10-18; `npm run check` and `npm run audit` passed.
 - This documentation system: committed 2026-10-19 (see [agent-context/HANDOFF.md](agent-context/HANDOFF.md)).
+- TASK-007 and TASK-008 (ISSUE-003, ISSUE-004): saving a connection drops its non-SQL sessions too, and non-SQL connects keep the first session when two race. Committed 2026-10-19 on `feature/charming-mestorf-7f41f0`; not merged into `main`. ISSUE-005 (the same gap in `delete_connection`) is still open.
