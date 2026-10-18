@@ -307,7 +307,7 @@ Done: PostgreSQL, MySQL, MariaDB, SQLite, Redis, CockroachDB, DuckDB, SQL Server
 
 ## 26. Rust hygiene
 
-Rules live in [CLAUDE.md](CLAUDE.md). Done so far: strict lints, typed errors, bound SQL parameters, secrets in `SecretString`, connect timeout, safe file writes, `npm run check`.
+Rules live in [docs/CONVENTIONS.md](docs/CONVENTIONS.md). Done so far: strict lints, typed errors, bound SQL parameters, secrets in `SecretString`, connect timeout, safe file writes, `npm run check`.
 
 - [x] `cargo-audit` and `cargo-deny` with `deny.toml` (license allowlist, advisories, no unknown sources): `npm run audit`. Kept out of `npm run check` because it fetches the advisory database. One ignored advisory, RUSTSEC-2023-0071 (rsa via russh, no fix released; reason in `deny.toml`)
 - [x] One lock per connection instead of one global lock (done: a slow query holds up only its own connection, and keep-alive skips busy ones). SQLite calls run in `block_in_place` (the connection is borrowed, so not `spawn_blocking`): the pool takes over the worker's other tasks while SQLite works

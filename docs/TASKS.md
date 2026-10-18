@@ -1,0 +1,41 @@
+# Tasks
+
+Known, actionable work, as of 2026-10-19. Feature gaps live in [../TODO.md](../TODO.md); this list holds work TODO.md doesn't track (branches, process, fixes found in review) and points into TODO.md for the rest. **Confirmed** means the owner asked for it; **Proposed** means an agent suggests it and the owner hasn't decided.
+
+**The standing direction** (owner, 2026-10-18): "continue with all the leftover todos". The owner has set no priority among the remaining TODO.md items since TODO's "Suggested order" was finished. Ask before starting anything large, and say which item you're picking.
+
+## Needs the owner first
+
+| ID | Task | Why it matters | Status | Blocked on |
+| --- | --- | --- | --- | --- |
+| TASK-001 | Redo the `src/main.ts` split on top of today's `main` | `main.ts` is 3,853 lines; the owner asked for the split on 2026-10-17 ("the main.ts split needs redoing on top of it"), and it was done on `claude/split-main-ts` (`6302abb`) but never merged. `main` has moved 37 commits since, and a trial merge conflicts | Confirmed, stale | Owner: redo now, or merge first? Use `6302abb`'s module boundaries as a guide, not its code |
+| TASK-002 | Decide on the live-test runner branch `claude/hungry-poitras-20604c` | It adds `npm run test:live`, a compose file and a CI job. Merges without textual conflicts, but duplicates `scripts/test-env.yml` and predates the nine new engines | Proposed | Owner: merge and fold into `test-env.yml`, redo, or drop |
+| TASK-003 | Remove superseded branches and worktrees (`claude/elated-bartik-7ba84a`, `claude/wonderful-booth-986c41`, and their `.claude/worktrees/` folders) | Clutter; both are superseded by `claude/split-main-ts` | Proposed | Owner's OK: deleting branches is hard to undo |
+| TASK-004 | Publish the first release | The updater has never run against a real release. Steps in [DEVELOPMENT.md](DEVELOPMENT.md#release). Version is still 0.1.0, with a large Unreleased changelog section | Proposed | Owner's explicit go-ahead to push and publish (REQ-091) |
+| TASK-005 | Verify the features marked "not tried in the app window" | The owner asked on 2026-10-17 ("verify the untried features") and 2026-10-18 ("check the DuckDB, SQL Server and ClickHouse forms and grids in the window") | Confirmed, partly done | Access: the owner declined computer-use for the app window on 2026-10-18. Ask, or give the owner a checklist to run |
+| TASK-006 | New logo, a blue mockingbird (REQ-063, TODO §25) | Still wanted | Confirmed | Q-004: what was wrong with the reverted one |
+
+## Ready to do
+
+| ID | Task | Why it matters | Files |
+| --- | --- | --- | --- |
+| TASK-007 | Saving a connection should also drop its open non-SQL sessions (ISSUE-003) | A safety level raised in the form doesn't reach an open Redis, MongoDB, DynamoDB, Elasticsearch or Cassandra session until it reconnects | `src-tauri/src/lib.rs` (`save_connection`; `disconnect` already removes all five) |
+| TASK-008 | Make non-SQL connects keep the first session when two race (ISSUE-004) | The SQL side has `Open::insert_new`; `Sessions::insert` overwrites | `src-tauri/src/sessions.rs` and the five `*_connect` commands |
+| TASK-009 | Update `src-tauri/Cargo.toml`'s `description` (ISSUE-001) | It still says "Postgres, MySQL/MariaDB and SQLite" | `src-tauri/Cargo.toml` |
+
+## From TODO.md (not prioritized by the owner)
+
+Pointers only; TODO.md has the detail.
+
+- TASK-010: the 15 `[~]` items, mostly engines' "Not done" lists (§24). Examples: SQL Server functions and procedures in the sidebar, MongoDB import/export and structure view, Oracle packages and users, Cassandra structure view, DynamoDB table creation.
+- TASK-011: bundle Oracle Instant Client with the app, or keep it a user install (§24 Oracle, DEC-009).
+- TASK-012: Snowflake and BigQuery; Redshift, Greenplum, Vertica (§24). The last three have no Docker image to test against.
+- TASK-013: run the Linux `.deb` and AppImage on a Linux desktop; build x86_64 (§25).
+- TASK-014: SSH ProxyJump/ProxyCommand and host certificates; a key file picker (§2).
+- TASK-015: MySQL roles, MariaDB lock and expiry in user management (§15).
+- TASK-016: GitHub Copilot as an assistant provider (§19).
+
+## Done recently (for context)
+
+- Oracle on the `oracle` crate with Instant Client: committed as `12be348` on 2026-10-18; `npm run check` and `npm run audit` passed.
+- This documentation system: committed 2026-10-19 (see [agent-context/HANDOFF.md](agent-context/HANDOFF.md)).
