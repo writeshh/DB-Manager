@@ -49,15 +49,7 @@ Postgres, MySQL/MariaDB and SQLite are the most complete and the most tested. Th
 
 ## Branches
 
-Nothing is waiting to be merged. Old branches that can go (TASK-003):
-
-| Branch | What | State |
-| --- | --- | --- |
-| `claude/split-main-ts` | `src/main.ts` split into modules | Merged 2026-10-19, with `main`'s later changes to `main.ts` ported into the modules (TASK-001) |
-| `claude/elated-bartik-7ba84a`, `claude/wonderful-booth-986c41` | Earlier attempts at the same split | Superseded by `claude/split-main-ts` |
-| `claude/hungry-poitras-20604c` | The live-test runner | Redone on `main` 2026-10-19 with its servers in `scripts/test-env.yml` (TASK-002); its MySQL `DEFAULT_GENERATED` fix (an expression default such as `CURRENT_TIMESTAMP` made a column count as generated, so the structure editor refused to change it) is on `main` too, with a unit test; the live run caught that it was missing |
-| `feature/charming-mestorf-7f41f0` | The non-SQL session fixes (ISSUE-003, ISSUE-004) | Already in `main` (`f2dacb4`) |
-| `feature/fixes` | Redis and the logo revert | Merged as PR #1 |
+Only `main` and `feature/fixes` (merged as PR #1) are left. The old split and live-test branches were deleted on 2026-10-19 (TASK-003); their work is on `main`.
 
 The branches' worktrees under `.claude/worktrees/` were removed on 2026-10-19.
 
