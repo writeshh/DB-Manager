@@ -6,11 +6,12 @@ The working state for whoever picks up next. Keep it short and current: replace 
 
 ## Current focus
 
-None in progress. The last two tasks are committed on `main`, not pushed:
+None in progress. The last task, checking the untried features in the app window (TASK-005), is committed on `main`, not pushed. It drove a debug `.app` (`npm run tauri build -- --debug --bundles app --no-sign`, run from inside the bundle with `ORACLE_CLIENT_LIB_DIR` set) against `scripts/test-env.sh`, with the owner's permission for computer use.
 
-- Google BigQuery (`082a2e1`): REST API, service account keys, datasets as databases, typed edits. Tried against the emulator; sign-in to Google only unit-tested.
-- SQL Server's gaps from TODO §24: named instances through SQL Browser, functions, procedures and sequences in the sidebar with editors, column defaults, comments and triggers in the structure editor. Tried in ignored tests against SQL Server 2022; the named-instance lookup against a stand-in SQL Browser, not a real one.
+- Eight bugs found and fixed (ISSUE-031); four noted, not fixed (ISSUE-032 to ISSUE-035).
+- Test connections named "TM test …" were added to the owner's connection list for the check (the debug build shares the installed app's data folder). Ask before deleting them.
+- Not checked: the Needs credentials badge, the metrics board's auto-refresh, lock, resize, boards and import/export.
 
 ## What needs the owner
 
-The open questions are Q-001 to Q-006 in [../KNOWN-ISSUES.md](../KNOWN-ISSUES.md#open-questions-for-the-owner). Remaining engine work: Snowflake, Redshift, Greenplum, Vertica (no Docker images to test against), and each engine's "Not done" list in TODO §24.
+The open questions are Q-001 to Q-006 in [../KNOWN-ISSUES.md](../KNOWN-ISSUES.md#open-questions-for-the-owner).

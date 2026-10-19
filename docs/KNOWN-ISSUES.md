@@ -24,6 +24,16 @@ Bugs, limitations and open questions, as of 2026-10-19. **Verified** means repro
 
 **ISSUE-014 — A split pane that isn't focused can't be scrolled or selected.** Reported (TODO §3): the grid and editor draw into one place.
 
+**ISSUE-031 — Bugs found checking the app window, fixed 2026-10-19.** Verified in the app window against `scripts/test-env.sh`, fixed in the same commit: Space never reached the structure editor's fields (the row-detail shortcut took it), so comments and trigger bodies lost their spaces; the document view's filter and sort fields, and the plugin and theme "Install from Git" URL fields, took no typing at all (their `onkeydown` returned `false` for every key but Return); Oracle connections hung in the app until macOS's local network permission was asked for (`Info.plist`); BigQuery failed to open an empty dataset (the emulator has no INFORMATION_SCHEMA there; tables now come from `tables.list`); a metrics table's picked row was unreadable on even rows (the zebra stripes outranked it); new SQL Server triggers started as BEFORE, which SQL Server lacks; ClickHouse's Length column showed `Date` for `Nullable(Date)`; DynamoDB's Region field had another field's placeholder.
+
+**ISSUE-032 — The sidebar doesn't refresh after a CREATE or DROP run in a SQL tab.** Verified 2026-10-19 in the app window (DuckDB, SQL Server, ClickHouse, Oracle, BigQuery, libSQL): the new table shows after ⌘R. Open: whether TablePlus refreshes on its own.
+
+**ISSUE-033 — An Oracle table's grid took 5 to 8 seconds to load the first time.** Seen 2026-10-19 in the app window; not measured. The browse runs the page, a count and a row-identity probe, each a round trip through `spawn_blocking`.
+
+**ISSUE-034 — A date cell's picker took no typed digits from computer-use.** Seen 2026-10-19 on an Oracle DATE column in the app window; not tried by hand, so it may be the automation rather than the app.
+
+**ISSUE-035 — SQL Server's results log shows a `GO` line at the start of later batches' text.** Seen 2026-10-19; cosmetic, the batches run correctly.
+
 ## Environment problems
 
 **ISSUE-020 — Shared macOS builds show a Gatekeeper prompt.** Verified 2026-10-15. Ad-hoc signed, not notarized. Workaround in [DEVELOPMENT.md](DEVELOPMENT.md#common-failures). Fix: a Developer ID certificate (paid Apple account).
