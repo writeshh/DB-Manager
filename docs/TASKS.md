@@ -26,15 +26,17 @@ Known, actionable work, as of 2026-10-19. Feature gaps live in [../TODO.md](../T
 
 Pointers only; TODO.md has the detail.
 
-- TASK-010: the 15 `[~]` items, mostly engines' "Not done" lists (§24). Examples: SQL Server functions and procedures in the sidebar, MongoDB import/export and structure view, Oracle packages and users, Cassandra structure view, DynamoDB table creation.
+- TASK-010: the 15 `[~]` items, mostly engines' "Not done" lists (§24). Examples: SQL Server's Entra ID sign-in and user management, MongoDB import/export and structure view, Oracle packages and users, Cassandra structure view, DynamoDB table creation.
 - TASK-011: bundle Oracle Instant Client with the app, or keep it a user install (§24 Oracle, DEC-009).
-- TASK-012: Snowflake and BigQuery; Redshift, Greenplum, Vertica (§24). The last three have no Docker image to test against.
+- TASK-012: Snowflake; Redshift, Greenplum, Vertica (§24). None has a Docker image to test against. (BigQuery done 2026-10-19.)
 - TASK-013: run the Linux `.deb` and AppImage on a Linux desktop; build x86_64 (§25).
 - TASK-014: SSH ProxyJump/ProxyCommand and host certificates; a key file picker (§2).
 - TASK-015: MySQL roles, MariaDB lock and expiry in user management (§15).
 - TASK-016: GitHub Copilot as an assistant provider (§19).
 
 ## Done recently (for context)
+
+- BigQuery (`082a2e1`) and SQL Server's sidebar and structure-editor gaps, 2026-10-19; `npm run check` passed and the ignored live tests ran against the emulator and SQL Server 2022.
 
 - Oracle on the `oracle` crate with Instant Client: committed as `12be348` on 2026-10-18; `npm run check` and `npm run audit` passed.
 - This documentation system: committed 2026-10-19 (see [agent-context/HANDOFF.md](agent-context/HANDOFF.md)).

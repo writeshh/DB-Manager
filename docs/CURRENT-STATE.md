@@ -30,7 +30,7 @@ TODO.md counts on 2026-10-18: 206 items done `[x]`, 15 partly done `[~]`, 3 not 
 | Safety (§18) | Done ([features/safe-mode.md](features/safe-mode.md)) |
 | AI, MCP (§19–20) | Done except GitHub Copilot and remote MCP (deferred) |
 | Plugins, scripts, settings, themes (§21–23) | Done; app language is English only |
-| Engines (§24) | 16 engines. Done: Redis, DuckDB. Partial: CockroachDB, SQL Server, MongoDB, ClickHouse, libSQL, D1, DynamoDB, Elasticsearch, Cassandra, Oracle (each entry lists what's missing). Not started: Redshift, Greenplum, Vertica, Snowflake, BigQuery |
+| Engines (§24) | 17 engines. Done: Redis, DuckDB. Partial: CockroachDB, SQL Server, MongoDB, ClickHouse, libSQL, D1, DynamoDB, Elasticsearch, Cassandra, Oracle, BigQuery (each entry lists what's missing). Not started: Redshift, Greenplum, Vertica, Snowflake |
 | App and platform (§25) | Menu bar, title bar, updater, bundles done. Not tried: an update from a real release, Developer ID signing, the Linux bundles on a Linux desktop, the x86_64 build. Logo not started |
 | Rust hygiene (§26) | Done |
 
@@ -38,7 +38,9 @@ TODO.md counts on 2026-10-18: 206 items done `[x]`, 15 partly done `[~]`, 3 not 
 
 Postgres, MySQL/MariaDB and SQLite are the most complete and the most tested. The others have the grid, editor or console and safe mode, and are missing some of: user management, backup, the structure editor, import/export. Never tried against the real service: Cloudflare D1 (fake server only). Tried against Docker images: everything else in `scripts/test-env.yml`.
 
-## Recent changes (2026-10-17 → 2026-10-18)
+## Recent changes (2026-10-17 → 2026-10-19)
+
+- 2026-10-19: Google BigQuery (REST API, service account keys, tried against the emulator); SQL Server named instances, functions, procedures and sequences in the sidebar, and column defaults, comments and triggers in the structure editor.
 
 - The `Driver` trait refactor, then nine engines in two days: DuckDB, SQL Server, ClickHouse, libSQL, D1, MongoDB, DynamoDB, Elasticsearch, Cassandra, Oracle.
 - In-app updater; Postgres Unix sockets; wider local discovery; metrics board wiring; the AI proxy's credentials; ⌘T can open an empty tab.

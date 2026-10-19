@@ -12,7 +12,7 @@ Each entry: the requirement, its source, and its status. **Source** is where it 
 | REQ-002 | Runs on macOS and Linux. | owner 2026-10-13 | Partial: macOS in daily use; Linux `.deb`/AppImage build in Docker but haven't been run on a Linux desktop |
 | REQ-003 | Rust core (Tauri). | owner 2026-10-13 ("go with Rust, personal tool") | Done |
 | REQ-004 | Don't copy TablePlus's licensing, trial, purchase, register, iOS promo, Sentry or bug-report screens. | TODO "Not copying" | Done (none exist) |
-| REQ-005 | The engines in TODO §24: Postgres, MySQL, MariaDB, SQLite, Redis, CockroachDB, DuckDB, SQL Server, ClickHouse, libSQL, D1, MongoDB, DynamoDB, Elasticsearch, Cassandra, Oracle; then Redshift, Greenplum, Vertica, Snowflake, BigQuery. | TODO §24 | Partial: the first 16 exist at varying depth; the last five not started |
+| REQ-005 | The engines in TODO §24: Postgres, MySQL, MariaDB, SQLite, Redis, CockroachDB, DuckDB, SQL Server, ClickHouse, libSQL, D1, MongoDB, DynamoDB, Elasticsearch, Cassandra, Oracle; then Redshift, Greenplum, Vertica, Snowflake, BigQuery. | TODO §24 | Partial: the first 16 and BigQuery exist at varying depth; the other four not started |
 
 ## Connections and workspaces (stated by the owner)
 

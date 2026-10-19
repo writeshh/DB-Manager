@@ -46,6 +46,7 @@ PR #1 (`feature/fixes`: Redis and the logo revert) merged on GitHub as `3f34a15`
 - `ab410c0` **`Conn` on a `Driver` trait** (DEC-005), then DuckDB, SQL Server, ClickHouse, libSQL, D1, MongoDB, DynamoDB, Elasticsearch, Cassandra and Oracle. `d164f67` one generic session map for the non-SQL engines.
 - `f8c8247` In-app updater from GitHub Releases. `4442089` Linux bundles build.
 - `12be348` Oracle through the `oracle` crate and Instant Client, after the pure-Rust `oracle-rs` failed (DEC-009).
+- `082a2e1` Google BigQuery over its REST API, tried against the emulator. Then SQL Server's gaps: named instances, routines and sequences in the sidebar, defaults, comments and triggers in the structure editor.
 
 ## 2026-10-19 — Documentation
 
