@@ -21,6 +21,7 @@ Known, actionable work, as of 2026-10-19. Feature gaps live in [../TODO.md](../T
 | --- | --- | --- | --- |
 | TASK-009 | Update `src-tauri/Cargo.toml`'s `description` (ISSUE-001) | It still says "Postgres, MySQL/MariaDB and SQLite" | `src-tauri/Cargo.toml` |
 | TASK-017 | Deleting a connection should also drop its open non-SQL sessions (ISSUE-005) | A deleted Redis, MongoDB, DynamoDB, Elasticsearch or Cassandra connection's session stays usable until disconnect | `src-tauri/src/lib.rs` (`delete_connection`; `save_connection` shows the five `remove_all` calls) |
+| TASK-018 | Split the Rust crate into a Cargo workspace | Measured 2026-10-19, not worth it yet: the crate builds cold in about 28 s (24.9 s of it our code, deps cached) and incrementally in about 6.6 s. The modules call each other in cycles (`sql` ↔ `connect`, `sql` ↔ `transfer`, `nosql` ↔ `assistant`, `safety` ↔ `sql`, and helpers in `lib.rs` that every folder uses), so crates would need a core crate with `error`, `tls`, `ssh` and the shared types first, and the top crate would still rebuild on every change | Not started | Owner: revisit if the cold build passes a minute or a second front end (a CLI, the MCP server) needs the drivers |
 
 ## From TODO.md (not prioritized by the owner)
 
