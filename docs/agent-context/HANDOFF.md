@@ -10,6 +10,7 @@ None in progress. The last task cleaned up the old branches (2026-10-19): cleare
 
 - The split was merged from `claude/split-main-ts`, then `main`'s 37 commits of `main.ts` changes (new engines in the connection form, document views, empty tabs, the SQL viewer, updates) were ported into the modules by hand. Checked in the browser preview with a stubbed backend (launcher, connect, the MongoDB and CockroachDB forms); not checked in the app window.
 - `src-tauri/src` was grouped into domain folders (pure moves, `aedbfd3`); a workspace split was measured and not done (TASK-018).
+- `src/` was grouped into feature folders the same way (pure moves; the production bundle's CSS is byte-identical before and after).
 - The old branches are still there (TASK-003); nothing on them is unmerged.
 - Earlier, from the TASK-005 check: test connections named "TM test …" are in the owner's connection list (the debug build shares the installed app's data folder). Ask before deleting them. Not checked in the app window: the Needs credentials badge, the metrics board's auto-refresh, lock, resize, boards and import/export.
 

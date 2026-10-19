@@ -20,7 +20,7 @@ Significant choices and why they were made. **Basis** says where the evidence is
 
 **DEC-008 — Safe mode and the passcode lock are enforced in Rust.** Commits `458652a`, `ddee112`, `aa88c2a`. The UI only prompts. At Alert 2 and Safe 2, "read-only" SQL also runs in a read-only transaction, so the database refuses hidden writes ([features/safe-mode.md](features/safe-mode.md)).
 
-**DEC-010 — Engines that aren't SQL get their own session types, in one generic map.** Commits `30f0d49` (Redis), `d164f67` (`sessions::Sessions<S>`). The document stores share one UI view (`docview.ts`, commit `3ef6c40`).
+**DEC-010 — Engines that aren't SQL get their own session types, in one generic map.** Commits `30f0d49` (Redis), `d164f67` (`sessions::Sessions<S>`). The document stores share one UI view (`nosql/docview.ts`, commit `3ef6c40`).
 
 **DEC-012 — Errors reach the UI as `{ code, message }`; the UI branches on the code.** Commit `2efec09` (2026-10-17 review). Matching on message text broke when wording changed.
 
