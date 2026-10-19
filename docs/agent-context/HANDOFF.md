@@ -6,11 +6,11 @@ The working state for whoever picks up next. Keep it short and current: replace 
 
 ## Current focus
 
-None in progress. The last task, checking the untried features in the app window (TASK-005), is committed on `main`, not pushed. It drove a debug `.app` (`npm run tauri build -- --debug --bundles app --no-sign`, run from inside the bundle with `ORACLE_CLIENT_LIB_DIR` set) against `scripts/test-env.sh`, with the owner's permission for computer use.
+None in progress. The last task cleaned up the old branches (2026-10-19): cleared about 72 GB of build output, removed the four worktrees, merged the `main.ts` split (TASK-001) and landed the live-test runner (TASK-002). Committed on `main`, not pushed.
 
-- Eight bugs found and fixed (ISSUE-031); four noted, not fixed (ISSUE-032 to ISSUE-035).
-- Test connections named "TM test …" were added to the owner's connection list for the check (the debug build shares the installed app's data folder). Ask before deleting them.
-- Not checked: the Needs credentials badge, the metrics board's auto-refresh, lock, resize, boards and import/export.
+- The split was merged from `claude/split-main-ts`, then `main`'s 37 commits of `main.ts` changes (new engines in the connection form, document views, empty tabs, the SQL viewer, updates) were ported into the modules by hand. Checked in the browser preview with a stubbed backend (launcher, connect, the MongoDB and CockroachDB forms); not checked in the app window.
+- The old branches are still there (TASK-003); nothing on them is unmerged.
+- Earlier, from the TASK-005 check: test connections named "TM test …" are in the owner's connection list (the debug build shares the installed app's data folder). Ask before deleting them. Not checked in the app window: the Needs credentials badge, the metrics board's auto-refresh, lock, resize, boards and import/export.
 
 ## What needs the owner
 

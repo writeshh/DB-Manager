@@ -6,9 +6,9 @@ Bugs, limitations and open questions, as of 2026-10-19. **Verified** means repro
 
 **ISSUE-001 — Stale descriptions of the three-engine app.** Verified. `src-tauri/Cargo.toml` `description` says "Postgres, MySQL/MariaDB and SQLite". The README's engine line and Layout table said the same until this documentation pass updated them. Fix: TASK-009.
 
-**ISSUE-002 — `src/main.ts` is 3,853 lines.** Verified. Every UI change touches it, so parallel branches conflict there (the reason the first split was held back, per the 2026-10-14 workspace-window notes). See TASK-001.
+**ISSUE-002 — `src/main.ts` was 3,853 lines.** Fixed 2026-10-19: split into modules, now about 1,000 lines (TASK-001; [ARCHITECTURE.md](ARCHITECTURE.md#the-ui)).
 
-**ISSUE-003 — Saving a connection doesn't close its open non-SQL sessions.** Fixed 2026-10-19 on `feature/charming-mestorf-7f41f0`, in the commit that adds `Sessions::remove_all`: `save_connection` now drops every session of the connection, under its new and previous name and its database tabs included, from `Open` and all five non-SQL maps. Was: only `Open::remove_all` ran, so Redis, MongoDB, DynamoDB, Elasticsearch and Cassandra sessions kept the old settings, including the safety level, until they reconnected. TASK-007.
+**ISSUE-003 — Saving a connection doesn't close its open non-SQL sessions.** Fixed 2026-10-19 in `f2dacb4`, the commit that adds `Sessions::remove_all`: `save_connection` now drops every session of the connection, under its new and previous name and its database tabs included, from `Open` and all five non-SQL maps. Was: only `Open::remove_all` ran, so Redis, MongoDB, DynamoDB, Elasticsearch and Cassandra sessions kept the old settings, including the safety level, until they reconnected. TASK-007.
 
 **ISSUE-004 — Two connects racing for one non-SQL session both open, and the second overwrites the first.** Fixed 2026-10-19 in the same commit as ISSUE-003: `Sessions::insert_new` keeps the first session, as `Open::insert_new` does for SQL (`2efec09`), and the five `*_connect` commands use it. Redis still replaces the session when switching database, on purpose. TASK-008.
 
@@ -52,5 +52,5 @@ Bugs, limitations and open questions, as of 2026-10-19. **Verified** means repro
 - **Q-002** Tailwind: adopt it for new components only, or not at all? (DEC-020)
 - **Q-003** Should the async rule in CONVENTIONS.md name `block_in_place` as the exception for borrowed connections? (ISSUE-030)
 - **Q-004** What was wrong with the first mockingbird logo (reverted in `0820765`)? (DEC-021)
-- **Q-005** Redo the main.ts split (TASK-001), and keep or delete the old split branches (TASK-003)?
+- **Q-005** Delete the old branches (TASK-003)? The main.ts split is merged (TASK-001).
 - **Q-006** May agents drive the native app window to verify features, and under what conditions? (DEC-028, TASK-005)

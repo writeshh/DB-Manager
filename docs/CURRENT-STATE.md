@@ -47,19 +47,21 @@ Postgres, MySQL/MariaDB and SQLite are the most complete and the most tested. Th
 - A project review (2026-10-17) hardened safe mode, connection import and the webview (`2efec09`).
 - Linux `.deb` and AppImage build in Docker.
 
-## Not on `main`
+## Branches
+
+Nothing is waiting to be merged. Old branches that can go (TASK-003):
 
 | Branch | What | State |
 | --- | --- | --- |
-| `claude/split-main-ts` (`6302abb`) | `src/main.ts` split into ~17 modules (3,577 → 948 lines) | Based on `f979e28`; `main` has moved 37 commits and `main.ts` grew to 3,853 lines. A trial merge conflicts in `src/main.ts`. Needs redoing (TASK-001) |
+| `claude/split-main-ts` | `src/main.ts` split into modules | Merged 2026-10-19, with `main`'s later changes to `main.ts` ported into the modules (TASK-001) |
 | `claude/elated-bartik-7ba84a`, `claude/wonderful-booth-986c41` | Earlier attempts at the same split | Superseded by `claude/split-main-ts` |
-| `claude/hungry-poitras-20604c` (`83a091d`, merge `e71a878`) | `npm run test:live`, `docker-compose.yml`, `scripts/test-live.sh`, a CI job for live tests | Not merged. A trial merge into today's `main` has no textual conflicts, but the branch predates `scripts/test-env.*`, so it would add a second compose file (`docker-compose.yml`) next to `scripts/test-env.yml`, and its live tests don't cover the newer engines (TASK-002) |
+| `claude/hungry-poitras-20604c` | The live-test runner | Redone on `main` 2026-10-19 with its servers in `scripts/test-env.yml` (TASK-002); its MySQL `DEFAULT_GENERATED` fix (an expression default such as `CURRENT_TIMESTAMP` made a column count as generated, so the structure editor refused to change it) is on `main` too, with a unit test; the live run caught that it was missing |
+| `feature/charming-mestorf-7f41f0` | The non-SQL session fixes (ISSUE-003, ISSUE-004) | Already in `main` (`f2dacb4`) |
 | `feature/fixes` | Redis and the logo revert | Merged as PR #1 |
 
-Git worktrees for the three `claude/*` branches still exist under `.claude/worktrees/`.
+The branches' worktrees under `.claude/worktrees/` were removed on 2026-10-19.
 
 ## Needs investigation
 
-- Whether the owner still wants the main.ts split (TASK-001).
 - What the owner disliked about the first mockingbird logo (Q-004).
 - `src-tauri/Cargo.toml`'s `description` and the README's Layout table describe the three-engine app (ISSUE-001).
