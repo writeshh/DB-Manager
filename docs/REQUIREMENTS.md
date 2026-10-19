@@ -28,7 +28,7 @@ Each entry: the requirement, its source, and its status. **Source** is where it 
 | REQ-027 | Double-click opens a connection on the launcher; single click focuses it with a visible focus border. | owner 2026-10-17 | Done |
 | REQ-028 | After connecting, the open-database dialog appears after a 1 s delay (owner first asked for 2–3 s, then "it's too long, reduce to 1s"). | owner 2026-10-17 | Done (`PICKER_DELAY_MS = 1000`, `src/workspaces.ts`) |
 | REQ-029 | Esc closes the open-database dialog. | owner 2026-10-17 | Done |
-| REQ-030 | Find local databases automatically and save connections for them; flag the ones whose default credentials failed with a badge, asking for credentials. | owner 2026-10-17 | Done (`discover.rs`) |
+| REQ-030 | Find local databases automatically and save connections for them; flag the ones whose default credentials failed with a badge, asking for credentials. | owner 2026-10-17 | Done (`connect/discover.rs`) |
 | REQ-031 | Postgres connections list functions, extension functions included. | owner 2026-10-17 (bug report) | Done |
 
 ## Editor, tabs and files (stated by the owner)

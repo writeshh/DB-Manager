@@ -30,9 +30,9 @@ Significant choices and why they were made. **Basis** says where the evidence is
 
 **DEC-015 — MCP settings stay in the config folder, never in a synced Location.** Basis: code and TODO §22: access tokens belong to one machine.
 
-**DEC-016 — Prefer writing small things over adding dependencies.** Basis: inferred from repeated choices, several stated in code: a RESP2 client (`redis.rs`), SigV4 "small enough to keep here rather than pull in the AWS SDK" (`dynamo/sigv4.rs`), plain SVG charts ("no chart library", TODO §11), the diagram's own layered layout ("no dependency", TODO §16), the updater without `zip` (its advisories).
+**DEC-016 — Prefer writing small things over adding dependencies.** Basis: inferred from repeated choices, several stated in code: a RESP2 client (`nosql/redis.rs`), SigV4 "small enough to keep here rather than pull in the AWS SDK" (`nosql/dynamo/sigv4.rs`), plain SVG charts ("no chart library", TODO §11), the diagram's own layered layout ("no dependency", TODO §16), the updater without `zip` (its advisories).
 
-**DEC-018 — The identifier and keychain services stay `dev.ritesh.dbmanager`.** Basis: code (`store.rs`: "renaming would orphan saved passwords"). Don't "fix" these to TableMinus.
+**DEC-018 — The identifier and keychain services stay `dev.ritesh.dbmanager`.** Basis: code (`connect/store.rs`: "renaming would orphan saved passwords"). Don't "fix" these to TableMinus.
 
 ## Engines
 
@@ -70,7 +70,7 @@ Significant choices and why they were made. **Basis** says where the evidence is
 
 **DEC-028 — Agents check the UI in a browser with a stubbed backend, not by driving the app window.** Basis: owner denied computer-use access to the app window (sessions of 2026-10-13 and 2026-10-18). On 2026-10-17 the owner did grant Screen Recording and Accessibility for one round of native checks ("you can proceed unsandboxed. But do not change existing database without taking a backup"). Ask each time before driving the native app.
 
-**DEC-024 — SQLite and DuckDB run through `block_in_place`, not `spawn_blocking`.** TODO §26 and `driver.rs`: the connection is borrowed, so it can't move to another thread. This departs from the letter of the async rule in [CONVENTIONS.md](CONVENTIONS.md) ("Blocking work … belongs in `spawn_blocking`"). Open: Q-003 asks whether to amend the rule's wording.
+**DEC-024 — SQLite and DuckDB run through `block_in_place`, not `spawn_blocking`.** TODO §26 and `sql/driver.rs`: the connection is borrowed, so it can't move to another thread. This departs from the letter of the async rule in [CONVENTIONS.md](CONVENTIONS.md) ("Blocking work … belongs in `spawn_blocking`"). Open: Q-003 asks whether to amend the rule's wording.
 
 ## Proposed or unresolved
 
